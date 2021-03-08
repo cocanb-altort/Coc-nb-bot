@@ -1,0 +1,47 @@
+def FC(id,prefixes):
+    for prefix in prefixes:
+        if prefix['id']==id:
+            return prefix['prefix']
+    
+    with open("prefixes.json", "w") as fileout:
+        prefixes.append({"id":id, "prefix":"!"})
+        json.dump(prefixes,fileout)
+        return "!"
+
+def read(bot,message):
+    with open("prefixes.json", "r") as filein:
+        prefixes = json.load(filein)
+        return FC(str(message.guild.id),prefixes)
+
+bot = commands.Bot(command_prefix=read,
+                   description='A bot for members of the Cocánb')
+
+@bot.event
+async def on_guild_remove(guild):
+    with open("prefixes.json", "r") as filein:
+        prefixes = json.load(filein)
+
+    for prefix in prefixes:
+        if prefix['id']==guild.id:
+            prefixes.pop(prefixes.index(prefix))
+
+    with open("prefixes.json", "w") as fileout:
+        p=json.dump(prefixes,fileout)
+        
+    await bot.change_presence(activity=discord.Game(name=r+"help"))
+
+
+@bot.command(name='prefixset', help='Changes the prefix of this bot in this server\n(only for people with administrator permissions)')
+async def prefixset(ctx,NEWPREFIX):
+  if message.author == 607583934527569920 or "administrator" in [i.name.lower() for i in ctx.author.roles]:
+    with open("prefixes.json", "r") as filein:
+        prefixes  = json.load(filein)
+        for x in range(len(prefixes)):
+            if prefixes[x]['id']==str(ctx.guild.id):
+
+                prefixes[x]['prefix'] = NEWPREFIX
+    with open("prefixes.json", "w") as fileout:
+        json.dump(prefixes,fileout)
+        await ctx.send("Changed prefix to: " + NEWPREFIX)
+  else:
+    await ctx.send("Only people with administrator permission can use this command"
