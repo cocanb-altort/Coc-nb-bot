@@ -5,7 +5,7 @@ import translator
 
 bot = commands.Bot(command_prefix='*', description='A bot for members of the Cocánb')
 
-class Cocanb(commands.Cog):
+class Cocánb(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
 
@@ -60,7 +60,7 @@ class Cocanb(commands.Cog):
   async def toctest(self, ctx, *, sentence):
     await ctx.send(translator.ctranslate(sentence))
   
-  @bot.command (name="script", help= "Sends the Cocánb symbols\nSupported: cocanb/cocánb, cock, and, ball, torture, shit, cringe, constriction, onomatopoeia/onomatopœia, altort, why cello there, roux for eternity, monkey/monke, tatrapomar\n(Words separated with / output the same thing)")
+  @bot.command (name="script", help= "Sends the Cocánb symbols\nSupported: cocanb/cocánb, cock, and, ball, torture, shit, cringe, constriction, onomatopoeia/onomatopœia, altort, why cello there, roux for eternity, monkey/monke, tatrapomar, mute, kick, ban\n(Words separated with / output the same thing)")
   async def script(self, ctx, *, word):
     word = word.lower()
     if word == "cocanb" or word == "cocánb":
@@ -91,6 +91,12 @@ class Cocanb(commands.Cog):
       await ctx.send ("<:monkey:817404046762704946>")
     elif word == "tatrapomar":
       await ctx.send ("<:tatrapomar:817413408370065468>")
+    elif word == "mute":
+      await ctx.send ("<:mute:819548998297583617>")
+    elif word == "kick":
+      await ctx.send ("<:kick:819548910883569685>")
+    elif word == "ban":
+      await ctx.send ("<:ban:819548958707023892>")
     else:
       await ctx.send ("This word has not been created yet.")
       

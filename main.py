@@ -15,7 +15,7 @@ import time
 from replit import db
 from keep_alive import keep_alive
 
-from cocanb import Cocanb
+from cocanb import Cocánb
 from unicode import Unicode
 from acknowledgements import Acknowledgements
 
@@ -99,7 +99,7 @@ async def customemoji(ctx, name, emoji_id, animated: bool=False):
     anim='a'
   await ctx.send(f'<{anim}:{name}:{emoji_id}>')
 
-bot.add_cog(Cocanb(bot))
+bot.add_cog(Cocánb(bot))
 bot.add_cog(Unicode(bot))
 bot.add_cog(Acknowledgements(bot))
 
