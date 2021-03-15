@@ -102,7 +102,11 @@ class Cocánb(commands.Cog):
       
   @bot.command(name='guide', help='Sends a guide on how to speak Cocánb')
   async def guide(self, ctx):
-    await ctx.send ('https://docs.google.com/document/d/1T6JLHZqwH1oNqnslxVk54BeNF9X6IjZypI3cxOf3Zks/edit?usp=sharing')
+    await ctx.send ('https://docs.google.com/document/d/1AwVWizqoL6YsQME7EQLwZO9AB8YLdsNQ0zDVY1bDaeQ/edit?usp=drivesdk')
+  
+  @bot.command(name='reddit', help='Sends a link to the Cocánb reddit')
+  async def reddit(self, ctx):
+    await ctx.send('https://www.reddit.com/r/cocanb?utm_medium=android_app&utm_source=share')
   
   @bot.command(name='wiki', help='Sends a link to the Cocánb Wiki')
   async def wiki(self, ctx):

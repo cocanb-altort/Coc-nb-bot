@@ -92,8 +92,8 @@ async def emoji(ctx, *, name):
 		await ctx.send("Invalid emoji")
 
 @bot.command(name='customemoji', help='Sends custom emoji not in c.emoji list\n(Emoji must be from a server this bot is in)')
-async def customemoji(ctx, name, emoji_id, animated: bool=False):
-  if bool(animated)==False:
+async def customemoji(ctx, name, emoji_id, animated: str = ''):
+  if animated=='':
     anim=''
   else:
     anim='a'
