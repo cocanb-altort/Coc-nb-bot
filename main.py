@@ -99,6 +99,11 @@ async def customemoji(ctx, name, emoji_id, animated: str = ''):
     anim='a'
   await ctx.send(f'<{anim}:{name}:{emoji_id}>')
 
+@bot.command(name='ipa', help='Sends official International Phonetic Alphabet chart')
+async def ipa(ctx):
+    with open("IPA_Kiel_2020_full.pdf", "rb") as file:
+      await ctx.send("Official International Phonetic Alphabet Chart", file=discord.File(file, "Official International Phonetic Alphabet Chart.pdf"))
+
 bot.add_cog(Cocánb(bot))
 bot.add_cog(Unicode(bot))
 bot.add_cog(Acknowledgements(bot))
