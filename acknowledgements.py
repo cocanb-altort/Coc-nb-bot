@@ -18,7 +18,7 @@ class Acknowledgements(commands.Cog):
   async def server(self, ctx):
     await ctx.send ('https://discord.gg/V3vGPg5AFA')
   
-  @bot.command (name='keyboard', help='Sends a file to download the Cocánb keyboard (Windows).')
+  @bot.command (name='keyboard', help='Sends a file to download the Cocánb keyboard (Windows)')
   async def keyboard(self, ctx):
     with open("Cocánb.klc", "rb") as file:
       await ctx.send("Cocánb keyboard", file=discord.File(file, "Cocánb.klc"))
