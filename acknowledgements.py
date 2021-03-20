@@ -16,7 +16,7 @@ class Acknowledgements(commands.Cog):
   
   @bot.command (name='server', help='Sends a link to the Cocánb server')
   async def server(self, ctx):
-    await ctx.send ('https://discord.gg/V3vGPg5AFA')
+    await ctx.send ('https://discord.gg/nc5xRG3xKC')
   
   @bot.command (name='keyboard', help='Sends a file to download the Cocánb keyboard (Windows)\n\nHow to download keyboard (Windows 10):\nStep 1. Download the file below\nStep 2. Unzip the file\nStep 3. Run \"setup.exe\" and follow required steps\nStep 4. Go to Settings > Time & Language > Language > Add preferred language\nStep 5. Download English (Canada) keyboard\nStep 6. After the download has finished, click on English (Canada) in the preferred languages list and select \"Options\"\nStep 7. Click\"Add a keyboard\" and choose \"Cocánb Keyboard\"')
   async def keyboard(self, ctx):
