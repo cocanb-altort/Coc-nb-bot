@@ -3,7 +3,7 @@ from discord.ext import commands
 import toc as t
 import translator
 
-bot = commands.Bot(command_prefix='*', description='A bot for members of the Cocánb')
+bot = commands.Bot(command_prefix='c.', description='A bot for members of the Cocánb')
 
 class Cocánb(commands.Cog):
   def __init__(self, bot):

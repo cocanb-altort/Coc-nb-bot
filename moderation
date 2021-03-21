@@ -1,0 +1,18 @@
+import discord
+from discord.ext import commands
+
+from discord.utils import get
+
+bot = commands.Bot(command_prefix='c.', description='A bot for members of the Cocánb')
+
+class Moderation(commands.Cog):
+  def __init__(self, bot):
+    self.bot = bot
+  
+  @bot.command(name="mute", help="Mutes a user")
+  async def mute(self, ctx, arg):
+    if f"<@{ctx.Member.id}>" == arg:
+      await ctx.send("You cannot mute yourself!")
+    else:
+      if 812270757899272213 in [role.id for role in ctx.Member.roles]:
+        await ctx

@@ -4,7 +4,7 @@ from discord.ext import commands
 from unicodedata import *
 import unicodedata
 
-bot = commands.Bot(command_prefix='*', description='A bot for members of the Cocánb')
+bot = commands.Bot(command_prefix='c.', description='A bot for members of the Cocánb')
 
 class Unicode(commands.Cog):
   def __init__(self, bot):

@@ -18,6 +18,7 @@ from keep_alive import keep_alive
 from cocanb import Cocánb
 from unicode import Unicode
 from acknowledgements import Acknowledgements
+#from moderation import Moderation
 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
@@ -107,6 +108,7 @@ async def ipa(ctx):
 bot.add_cog(Cocánb(bot))
 bot.add_cog(Unicode(bot))
 bot.add_cog(Acknowledgements(bot))
+#bot.add_cog(Moderation(bot))
 
 keep_alive()
 bot.run(TOKEN)
