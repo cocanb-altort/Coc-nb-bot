@@ -91,8 +91,8 @@ def translate(sentence):
   afternon = afternon.replace('non', 'nôn')
   finishlist = finishlist.replace('non', 'nôn')
   afternon = afternon.replace('non', 'nôn')
-  cocanb = finishlist+'▟'+afternon
-
+  cocanb = finishlist[:-1]+'▟'+afternon[1:]
+  
   #consonant and vowel lists
   consonant = ['q', 'r', 't', 'p', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'h', ' ']
   vowel = ['a', 'e', 'i', 'o', 'u', 'y']
@@ -107,6 +107,10 @@ def translate(sentence):
       if cocanb[i-1] in consonant and cocanb[i+1] in consonant:
         cocanb = cocanb[:i] + 'ň' + cocanb[i+1:]
       consonant.append('n')
+
+  for i in range(len(cocanb)):
+    if cocanb[i] == 'n':
+      cocanb = cocanb[:i] + random.choice(['n', 'n', 'ń']) + cocanb[i+1:]
 
   #inserting spaces
   if len(cocanb)>10:
@@ -197,7 +201,7 @@ def translate(sentence):
       cocanb = cocanb[:i] + random.choice(['z', 'z', 'ž', 'ź']) + cocanb[i+1:]
   
   cocanb = cocanb.replace('■','Cocán')
-  cocanb = cocanb.replace('▟', 'o')
+  cocanb = cocanb.replace('▟', 'non')
   cocanb = cocanb.replace('┃┃','sc')
   return cocanb
 
