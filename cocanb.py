@@ -60,7 +60,7 @@ class Cocánb(commands.Cog):
   async def toctest(self, ctx, *, sentence):
     await ctx.send(translator.ctranslate(sentence))
   
-  @bot.command (name="script", help= "Sends the Cocánb symbols\nSupported: cocanb/cocánb, cock, and, ball, torture, shit, cringe, constriction, onomatopoeia/onomatopœia, altort, why cello there, roux for eternity, monkey/monke, tatrapomar, mute, kick, ban\n(Words separated with / output the same thing)")
+  @bot.command (name="script", help= "Sends the Cocánb symbols\nSupported: cocanb/cocánb, cock, and, ball, torture, shit, cringe, constriction, onomatopoeia/onomatopœia, altort, why cello there, roux for eternity, monkey/monke, tatrapomar, amogus, mute, kick, ban\n(Words separated with / output the same thing)")
   async def script(self, ctx, *, word):
     word = word.lower()
     if word == "cocanb" or word == "cocánb":
@@ -91,6 +91,8 @@ class Cocánb(commands.Cog):
       await ctx.send ("<:monkey:817404046762704946>")
     elif word == "tatrapomar":
       await ctx.send ("<:tatrapomar:817413408370065468>")
+    elif word == "amogus":
+      await ctx.send ("<:amogus:813328288332251137>")
     elif word == "mute":
       await ctx.send ("<:mute:819548998297583617>")
     elif word == "kick":
