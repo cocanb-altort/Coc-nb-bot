@@ -28,6 +28,12 @@ bot=commands.Bot(command_prefix="c.")
 @bot.event
 async def on_ready():
   await bot.change_presence(status=discord.Status.online, activity=discord.Game(name='c.help'))
+  
+@bot.event
+async def on_message(message):
+    if message.content == "?" and message.author.id == 698865312954843216:
+        await message.channel.send('shut the fuck up grogu you know what we were talking about stop acting stupid')
+    await bot.process_commands(message)
 
 @bot.command(name='time',
              help='Shows current time given a timezone (In (-)HH:MM format)')
