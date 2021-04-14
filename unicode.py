@@ -44,7 +44,7 @@ class Unicode(commands.Cog):
     except:
       await ctx.send('<no description>')
     
-  @bot.command(name='unicode', help='Sends full unicode chart (You can choose to download .zip or .rar file)')
+  @bot.command(name='unicode', help='Sends full unicode chart (You can choose to download .zip, .rar or .tar.gz file)')
   async def unicode(self, ctx, format:str='zip'):
     if format == 'zip':
       with open("Full Unicode Chart.zip", "rb") as file:
@@ -52,5 +52,8 @@ class Unicode(commands.Cog):
     elif format == 'rar':
       with open("Full Unicode Chart.rar", "rb") as file:
           await ctx.send("Full Unicode Chart.rar", file=discord.File(file, "Full Unicode Chart.rar"))
+    elif format == 'tar.gz' or format == 'targz' or format == 'gz':
+      with open("Full Unicode Chart.tar.gz", "rb") as file:
+          await ctx.send("Full Unicode Chart.tar.gz", file=discord.File(file, "Full Unicode Chart.tar.gz"))
     else:
       await ctx.send("Invalid format")

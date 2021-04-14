@@ -7,7 +7,7 @@ class Acknowledgements(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
   
-  @bot.command (name='reclist', help='Sends a list of recommended servers')
+  @bot.command (name='reclist', help='Sends a list of recommended servers (does not work on the Trouxth)')
   async def recommended(self, ctx):
     if ctx.guild.id == 793153755544813598:
       pass
