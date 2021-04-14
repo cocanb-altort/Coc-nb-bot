@@ -21,6 +21,9 @@ class Cocánb(commands.Cog):
       await ctx.send ('sPeaux-é-eaux sCocâne Altorne Eaux-néceumdfe Bèque Beufteuf\n\nCocânbe altorte, urpénitorte ureaudictorte urichècsous asse tivitine vaulvinampe plicâte yeaupaïeauc onchte rictiaute spénie hautèche ticlènne ôncde, ceuldaiseux egueurbque dègsse-bâle fuguinncf beundeurbeun laubèque séreubssie. Timaïn vaulvdire écteulpa îne-fouaque tivitie, éssucaïe enitâpe yeur-tchinne-ouâpe, la-jénitte assepâne, quinnche-qué ésinbe, albusse tingènne, itafleugue, guinurésrâppe, laticeult aurtout, réraux-tiéleque treusse-tîme oulatieauque, néneauque iquinnonnsse dûqué guilgue-cheude sbeul-geucsse quideulge guilgue-geulgue glide efètche feuneurgue geurbgue. Sréssipie neaussoucaque tivitie émaresse aivdire écfisse icaple asourvime asseautchissœux, mautieaunâppe léasurte chrouge rôtie tchoumilie, atieauque naulèdgte hâsse plaïe-pléa sinnte sadisse tidaumine annte-nonne éctive djeu-tchètte-flais hâtchmire blaitcheutchfeunne cœurbaïte déquidsse breaux bâtchsse. Mâneausse ésse-prâque titchais-carre-sais nificât néale trisque neaunidfe béesie yètqueufsais.')
     elif format == "backwards":
       await ctx.send ('.esfħktey iseéb fdýnon ksirt laéħn acîfin ğisrracečit çarpsé htónaM .hthcaáb ohgb sdýced tiebřk ňfčlcğhheilb rimčah eħlftğečýjşd hbfitce nontna nimodit sidas tnis aélpialp htah tgdelŵon koóita ,ilimuhc itôr eğuorh trüsael pânoitom ,œsíhcosa mivrusa elpaci şýhpce ridvie çeramé itivit cácûson eipicérhT .ggbřg gřňf čgefe dýhlhg głggdlig hggłdýc xħggłbs dħjşglhýg ecýd snonnikci konieén ,koitalu mitsørt celeitorer ,útro tłkcital ,parhterünig ,gølfati ,negnit sübla ,bnize éuqşñik ,napsa ,tínegal ,paŵnicrei patiné ğacüse ,itivit cáufni ápltce ridvlòv niamîhT .isbřes cebol ňbřdňb fknighýf laábsged kbřge esğedłc ddkno nelcit sêto ínepht toitcir tşno coiapoóī tacilp pãnivlov nitivit çaá uxêşirü trotcidorü trotîneprü ,trotla bnácoC\n\nftfB ceB fdmcénO nrotlA nácoCht oéoPht')
+    elif format == "audio":
+      with open("thPoéo pronunciation audio.mp3", "rb") as file:
+          await ctx.send("thPoéo thCocán Altorn Onécmdf Bec Bftf pronunciation guide", file=discord.File(file, "thPoéo thCocán Altorn Onécmdf Bec Bftf pronunciation guide"))
     else:
       await ctx.send ('Invalid format')
 
@@ -109,6 +112,50 @@ class Cocánb(commands.Cog):
   @bot.command(name='guide', help='Sends a guide on how to speak Cocánb')
   async def guide(self, ctx):
     await ctx.send ('https://docs.google.com/document/d/1AwVWizqoL6YsQME7EQLwZO9AB8YLdsNQ0zDVY1bDaeQ/edit?usp=drivesdk')
+  
+  @bot.command(name='language', help='Sends the name for "Cocánb" in different languages\n\nSupported languages: English, French, Spanish, Portugese, German, Swedish, Finnish, Czech, Polish, Traditional Chinese, Simplified Chinese, Japanese, Korean, Russian, Greek, Arabic, Devenagari, Malayan, Cocánb')
+  async def language(self, ctx, lang):
+    lang = lang.lower()
+    if lang == "english":
+      await ctx.send("Cocánb")
+    elif lang == "french":
+      await ctx.send("Cocânbe")
+    elif lang == "spanish":
+      await ctx.send("Cocánb")
+    elif lang == "portugese":
+      await ctx.send("Concanês")
+    elif lang =="german":
+      await ctx.send("Bischochaisch")
+    elif lang == "swedish":
+      await ctx.send("Kåkanb")
+    elif lang == "finnish":
+      await ctx.send("Kokaanbi")
+    elif lang == "czech":
+      await ctx.send("Kokánb")
+    elif lang == "polish":
+      await ctx.send("Kokąb")
+    elif lang == "chinese" or lang == "traditional chinese" or lang == "trad chinese" or lang == "chinese traditional" or lang == "chinese trad":
+      await ctx.send("哥加尼巴")
+    elif lang == "simplified chinese" or lang == "chinese simplified" or lang == "sim chinese" or lang == "simp chinese" or lang == "chinese sim" or lang == "chinese sim":
+      await ctx.send("哥加尼巴")
+    elif lang == "japanese":
+      await ctx.send ("コカンブ")
+    elif lang == "korean" or lang == "corean":
+      await ctx.send("코칸브어")
+    elif lang == "russian":
+      await ctx.send("Коканбский")
+    elif lang == "greek":
+      await ctx.send("Κοκάνβ")
+    elif lang == "arabic":
+      await ctx.send("كُكَنب")
+    elif lang =="hindi" or lang == "devenagari":
+      await ctx.send("कोकान्ब्")
+    elif lang == "malayam":
+      await ctx.send("കോകാന്ബ്")
+    elif lang == "cocanb" or lang == "cocánb":
+      await ctx.send("Cocánn onbf")
+    else:
+      await ctx.send("Speakers of this language have not yet encountered Cocánb.")
   
   @bot.command(name='reddit', help='Sends a link to the Cocánb reddit')
   async def reddit(self, ctx):
