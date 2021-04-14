@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
-import toc as t
-import translator
+from Translate import toc as t
+from Translate import translator
 
 bot = commands.Bot(command_prefix='c.', description='A bot for members of the Cocánb')
 
@@ -22,7 +22,7 @@ class Cocánb(commands.Cog):
     elif format == "backwards":
       await ctx.send ('.esfħktey iseéb fdýnon ksirt laéħn acîfin ğisrracečit çarpsé htónaM .hthcaáb ohgb sdýced tiebřk ňfčlcğhheilb rimčah eħlftğečýjşd hbfitce nontna nimodit sidas tnis aélpialp htah tgdelŵon koóita ,ilimuhc itôr eğuorh trüsael pânoitom ,œsíhcosa mivrusa elpaci şýhpce ridvie çeramé itivit cácûson eipicérhT .ggbřg gřňf čgefe dýhlhg głggdlig hggłdýc xħggłbs dħjşglhýg ecýd snonnikci konieén ,koitalu mitsørt celeitorer ,útro tłkcital ,parhterünig ,gølfati ,negnit sübla ,bnize éuqşñik ,napsa ,tínegal ,paŵnicrei patiné ğacüse ,itivit cáufni ápltce ridvlòv niamîhT .isbřes cebol ňbřdňb fknighýf laábsged kbřge esğedłc ddkno nelcit sêto ínepht toitcir tşno coiapoóī tacilp pãnivlov nitivit çaá uxêşirü trotcidorü trotîneprü ,trotla bnácoC\n\nftfB ceB fdmcénO nrotlA nácoCht oéoPht')
     elif format == "audio":
-      with open("thPoéo pronunciation audio.mp3", "rb") as file:
+      with open("Resources/thPoéo pronunciation audio.mp3", "rb") as file:
           await ctx.send("thPoéo thCocán Altorn Onécmdf Bec Bftf pronunciation guide", file=discord.File(file, "thPoéo thCocán Altorn Onécmdf Bec Bftf pronunciation guide"))
     else:
       await ctx.send ('Invalid format')
@@ -156,7 +156,12 @@ class Cocánb(commands.Cog):
       await ctx.send("Cocánn onbf")
     else:
       await ctx.send("Speakers of this language have not yet encountered Cocánb.")
-  
+
+  @bot.command (name='keyboard', help='Sends a file to download the Cocánb keyboard (Windows)\n\nHow to download keyboard (Windows 10):\nStep 1. Download the file below\nStep 2. Unzip the file\nStep 3. Run \"setup.exe\" and follow required steps\nStep 4. Go to Settings > Time & Language > Language > Add preferred language\nStep 5. Download English (Canada) keyboard\nStep 6. After the download has finished, click on English (Canada) in the preferred languages list and select \"Options\"\nStep 7. Click \"Add a keyboard\" and choose \"Cocánb Keyboard\"\n\nNote: if you downloaded the older version of the keyboard, you have to go to Settings > Add or remove programs and search \"Cocánb\" and delete the old keyboard.\nIf this still doesn\'t work, try again but this time go to File Explorer and delete the source file for the keyboard.')
+  async def keyboard(self, ctx):
+    with open("Resources/cocaanb.rar", "rb") as file:
+      await ctx.send("How to download keyboard (Windows 10):\nStep 1. Download the file below\nStep 2. Unzip the file\nStep 3. Run \"setup.exe\" and follow required steps\nStep 4. Go to Settings > Time & Language > Language > Add preferred language\nStep 5. Download English (Canada) keyboard\nStep 6. After the download has finished, click on English (Canada) in the preferred languages list and select \"Options\"\nStep 7. Click \"Add a keyboard\" and choose \"Cocánb Keyboard\"\n\nNote: if you downloaded the older version of the keyboard, you have to go to Settings > Add or remove programs and search \"Cocánb\" and delete the old keyboard.\nIf this still doesn\'t work, try again but this time go to File Explorer and delete the source file for the keyboard.", file=discord.File(file, "Cocánb Keyboard"))
+
   @bot.command(name='reddit', help='Sends a link to the Cocánb reddit')
   async def reddit(self, ctx):
     await ctx.send('https://www.reddit.com/r/cocanb?utm_medium=android_app&utm_source=share')

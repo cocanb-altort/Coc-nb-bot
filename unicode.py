@@ -44,19 +44,19 @@ class Unicode(commands.Cog):
     except:
       await ctx.send('<no description>')
     
-  @bot.command(name='unicode', help='Sends full unicode chart (You can choose to download .zip, .rar, .tar.gz or .jar file)')
+  @bot.command(name='unicode', help='Sends full unicode chart\n\nSupported file formats: .zip, .rar, .tar.gz or .jar file')
   async def unicode(self, ctx, format:str='zip'):
     if format == 'zip' or format == '.zip':
-      with open("Full Unicode Chart.zip", "rb") as file:
+      with open("Resources/Full Unicode Charts/Full Unicode Chart.zip", "rb") as file:
           await ctx.send("Full Unicode Chart.zip", file=discord.File(file, "Full Unicode Chart.zip"))
     elif format == 'rar' or format == '.rar':
-      with open("Full Unicode Chart.rar", "rb") as file:
+      with open("Resources/Full Unicode Charts/Full Unicode Chart.rar", "rb") as file:
           await ctx.send("Full Unicode Chart.rar", file=discord.File(file, "Full Unicode Chart.rar"))
     elif format == '.tar.gz' or format == 'tar.gz' or format == 'targz' or format == 'gz' or format == '.gz':
-      with open("Full Unicode Chart.tar.gz", "rb") as file:
+      with open("Resources/Full Unicode Charts/Full Unicode Chart.tar.gz", "rb") as file:
           await ctx.send("Full Unicode Chart.tar.gz", file=discord.File(file, "Full Unicode Chart.tar.gz"))
     elif format == 'jar' or format == '.jar':
-      with open ("Full Unicode Chart.jar", "rb") as file:
+      with open ("Resources/Full Unicode Charts/Full Unicode Chart.jar", "rb") as file:
         await ctx.send("Full Unicode Chart.jar", file=discord.File(file, "Full Unicode Chart.jar"))
     else:
       await ctx.send("Invalid format")
