@@ -35,6 +35,10 @@ async def on_message(message):
         await message.channel.send('shut the fuck up grogu you know what we were talking about stop acting stupid')
     await bot.process_commands(message)
 
+@bot.command(name='ping', help="Checks whether bot is online.")
+async def ping(ctx):
+  await ctx.send('Bot is online.')
+
 @bot.command(name='time',
              help='Shows current time given a timezone (In (-)HH:MM format)')
 async def time(ctx, timezone: str = '00:00'):
