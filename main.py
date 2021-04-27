@@ -18,7 +18,7 @@ from keep_alive import keep_alive
 from cocanb import Cocánb
 from unicode import Unicode
 from acknowledgements import Acknowledgements
-#from moderation import Moderation
+from moderation import Moderation
 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
@@ -83,7 +83,7 @@ async def delmsgreturn(ctx, *, msg):
 @bot.command(
     name="emoji",
     help=
-    "Sends some emojis\nSupported: amogus/amongus/among us, barry, biang, bruh/facepalm, surprised/that's illgal/illegal, void, woah\n(words separated by / output the same emoji)"
+    "Sends some emojis\nSupported: amogus/amongus/among us, barry, biang, bruh/facepalm, surprised/that's illegal/illegal, void, woah\n(words separated by / output the same emoji)"
 )
 async def emoji(ctx, *, name):
 	name = name.lower()
@@ -116,13 +116,13 @@ async def customemoji(ctx, name, emoji_id, animated: str = ''):
 
 @bot.command(name='ipa', help='Sends official International Phonetic Alphabet chart')
 async def ipa(ctx):
-    with open("IPA_Kiel_2020_full.pdf", "rb") as file:
+    with open("Resources/IPA_Kiel_2020_full.pdf", "rb") as file:
       await ctx.send("Official International Phonetic Alphabet Chart", file=discord.File(file, "Official International Phonetic Alphabet Chart.pdf"))
 
 bot.add_cog(Cocánb(bot))
 bot.add_cog(Unicode(bot))
 bot.add_cog(Acknowledgements(bot))
-#bot.add_cog(Moderation(bot))
+bot.add_cog(Moderation(bot))
 
 keep_alive()
 bot.run(TOKEN)
