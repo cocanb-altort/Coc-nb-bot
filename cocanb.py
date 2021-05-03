@@ -109,9 +109,14 @@ class Cocánb(commands.Cog):
     else:
       await ctx.send ("This word has not been created yet.")
       
-  @bot.command(name='guide', help='Sends a guide on how to speak Cocánb')
-  async def guide(self, ctx):
-    await ctx.send ('https://docs.google.com/document/d/1AwVWizqoL6YsQME7EQLwZO9AB8YLdsNQ0zDVY1bDaeQ/edit?usp=drivesdk')
+  @bot.command(name='guide', help='Sends a guide on how to speak Cocánb (doc guide or video guide)')
+  async def guide(self, ctx, format='doc'):
+    if format == 'doc' or format == 'document:
+      await ctx.send ('https://docs.google.com/document/d/1AwVWizqoL6YsQME7EQLwZO9AB8YLdsNQ0zDVY1bDaeQ/edit?usp=drivesdk')
+    elif format == 'video':
+      await ctx.send ('https://youtu.be/GSCpGW5EiKo')
+    else:
+      await ctx.send ('Invalid format')
   
   @bot.command(name='language', help='Sends the name for "Cocánb" in different languages\n\nSupported languages: English, French, Spanish, Portugese, German, Swedish, Finnish, Czech, Polish, Traditional Chinese, Simplified Chinese, Japanese, Korean, Russian, Greek, Arabic, Devenagari, Malayan, Cocánb')
   async def language(self, ctx, lang):

