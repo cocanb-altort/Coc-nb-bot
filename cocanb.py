@@ -1,7 +1,10 @@
 import discord
 from discord.ext import commands
+
 from Translate import toc as t
 from Translate import translator
+
+import cocanb
 
 bot = commands.Bot(command_prefix='c.', description='A bot for members of the Cocánb')
 
@@ -66,6 +69,14 @@ class Cocánb(commands.Cog):
   @bot.command(name='toctest', help='In development')
   async def toctest(self, ctx, *, sentence):
     await ctx.send(translator.ctranslate(sentence))
+    
+  @bot.command(name='bettertoc', help='English to Cocánb by someone who can actually code')
+  async def bettertoc(self, ctx, *, sentence):
+    await ctx.send(cocanb.english_to_cocanb(sentence))
+  
+  @bot.command(name='bettertoe', help='Cocánb to English by someone who can actually code')
+  async def bettertoe(self, ctx, *, sentence):
+    await ctx.send(cocanb.cocanb_to_english(sentence))
   
   @bot.command (name="script", help= "Sends the Cocánb symbols\nSupported: cocanb/cocánb, cock, and, ball, torture, shit, cringe, constriction, onomatopoeia/onomatopœia, altort, why cello there, roux for eternity, monkey/monke, tatrapomar, amogus, mute, kick, ban\n(Words separated with / output the same thing)")
   async def script(self, ctx, *, word):
@@ -111,7 +122,7 @@ class Cocánb(commands.Cog):
       
   @bot.command(name='guide', help='Sends a guide on how to speak Cocánb (doc guide or video guide)')
   async def guide(self, ctx, format='doc'):
-    if format == 'doc' or format == 'document:
+    if format == 'doc' or format == 'document':
       await ctx.send ('https://docs.google.com/document/d/1AwVWizqoL6YsQME7EQLwZO9AB8YLdsNQ0zDVY1bDaeQ/edit?usp=drivesdk')
     elif format == 'video':
       await ctx.send ('https://youtu.be/GSCpGW5EiKo')
