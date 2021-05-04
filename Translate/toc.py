@@ -29,7 +29,7 @@ def addDiaretics(char,nec):
     #Adding diacritics to valid letters
 
     a = ["à","á","â","ä"]
-    e = ["è","é","ê"]
+    e = ["è","é","ê","ë"]
     i = ["î","í","ì"]
     o = ["ô","ó","ò","ö"]
     u = ["ü","ù","ú","û"]
