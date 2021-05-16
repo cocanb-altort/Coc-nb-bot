@@ -22,7 +22,7 @@ class Unicode(commands.Cog):
 
   @bot.command(name='tocode', help='Converts character to unicode codepoint')
   async def tocode (self, ctx, *, character):
-    if len(character) <= 399:
+    try:
       characters = list(character)
       responses = list()
       for i in range(len(characters)):
@@ -49,8 +49,8 @@ class Unicode(commands.Cog):
         responses.append(response)
       responses = ' '.join(responses)
       await ctx.send('```' + responses + '```')
-    else:
-      await ctx.send('Please limit message to 399 characters.')
+    except:
+      await ctx.send('Character limit reached.')
   
   
   @bot.command(name='todesc', help='Converts unicode codepoint to description')
