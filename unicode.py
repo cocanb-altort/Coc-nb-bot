@@ -6,35 +6,70 @@ import unicodedata
 
 bot = commands.Bot(command_prefix='c.', description='A bot for members of the Cocánb')
 
+def tocodefunc (character):
+  if len(character) == 3 and character[0] == '`' and character [2] == '`':
+    character = character[1]
+  elif len(character) == 7 and character [0:3] == '```' and character [4:7] == '```':
+    character = character[3]
+  else: 
+    character = character
+  response = hex(ord(character))
+  response = response[2:]
+  if len (response) == 1:
+    response = '000' + response
+  elif len (response) == 2:
+    response = '00' + response
+  elif len (response) == 3:
+    response = '0' + response
+  else:
+    pass
+  code = '`U+' + response + '`'
+  return code.upper()
+
 class Unicode(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
 
-  @bot.command(name='tochar', help='Converts unicode codepoint to character')
-  async def tochar(self, ctx, codepoint):
-    response = chr(int(codepoint, 16))
-    await ctx.send('```' + response + '```')
+  @bot.command(name='tochar', help='Converts unicode codepoints to characters')
+  async def tochar(self, ctx, *, codepoint):
+    codepoints = codepoint.split(' ')
+    responses = list()
+    for i in range(len(codepoints)):
+      response = chr(int(codepoints[i],16))
+      responses.append(response)
+    responses = ''.join(responses)
+    await ctx.send('```\n' + responses + '\n```')
 
   @bot.command(name='tocode', help='Converts character to unicode codepoint')
-  async def tocode(self, ctx, *, character):
-    if len(character) == 3 and character[0] == '`' and character [2] == '`':
-      character = character[1]
-    elif len(character) == 7 and character [0:3] == '```' and character [4:7] == '```':
-      character = character[3]
-    else: 
-      character = character
-    response = hex(ord(character))
-    response = response[2:]
-    if len (response) == 1:
-      response = '000' + response
-    elif len (response) == 2:
-      response = '00' + response
-    elif len (response) == 3:
-      response = '0' + response
+  async def tocode (self, ctx, *, character):
+    if len(character) <= 399:
+      characters = list(character)
+      responses = list()
+      for i in range(len(characters)):
+        if len(characters[i]) == 3 and  characters[i][0] == '`' and characters[i][2] == '`':
+          characters[i] = characters[i][1]
+        elif len(character) == 7 and characters[i][0:3] == '```' and characters[i][4:7] == '```':
+          characters[i] = characters[i][3]
+        else: 
+          characters[i] = characters[i]
+        response = hex(ord(characters[i]))
+        response = response[2:]
+        if len (response) == 1:
+          response = '000' + response
+        elif len (response) == 2:
+          response = '00' + response
+        elif len (response) == 3:
+          response = '0' + response
+        else:
+          pass
+        code = response
+        response = code.upper()
+        responses.append(response)
+      responses = ' '.join(responses)
+      await ctx.send('```' + responses + '```')
     else:
-      pass
-    code = '`U+' + response + '`'
-    await ctx.send(code.upper())
+      await ctx.send('Please limit message to 399 characters.')
+  
   
   @bot.command(name='todesc', help='Converts unicode codepoint to description')
   async def todesc(self, ctx, codepoint):

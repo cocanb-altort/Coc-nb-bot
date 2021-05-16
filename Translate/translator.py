@@ -171,7 +171,7 @@ def translate(sentence):
     if cocanb[i] == 'a':
       cocanb = cocanb[:i] + random.choice(['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'á', 'á', 'â', 'â', 'à', 'à', 'ä']) + cocanb[i+1:]
     if cocanb[i] == 'e':
-      cocanb = cocanb[:i] + random.choice(['e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'é', 'é', 'ê', 'ê', 'è', 'è']) + cocanb[i+1:]
+      cocanb = cocanb[:i] + random.choice(['e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'é', 'é', 'ê', 'ê', 'è', 'è', 'ë']) + cocanb[i+1:]
     if cocanb[i] == 'i':
       cocanb = cocanb[:i] + random.choice(['i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'í', 'í', 'î', 'î', 'ì', 'ì']) + cocanb[i+1:]
     if cocanb[i] == 'o':
