@@ -40,6 +40,8 @@ class Unicode(commands.Cog):
           response = '00' + response
         elif len (response) == 3:
           response = '0' + response
+        elif len (response) == 5:
+          response = '0' + response
         else:
           pass
         code = response
