@@ -104,6 +104,8 @@ async def emoji(ctx, *, name):
 		await ctx.send("<:void:798150976191201313>")
 	elif name == "woah":
 		await ctx.send("<:woah:807905973162999818>")
+	elif name =="shitting toothpaste":
+	  await ctx.send("<:shittingtoothpaste:850006091827773441>")
 	else:
 		await ctx.send("Invalid emoji")
 
