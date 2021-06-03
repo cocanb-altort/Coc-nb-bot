@@ -84,7 +84,7 @@ async def delmsgreturn(ctx, *, msg):
 @bot.command(
     name="emoji",
     help=
-    "Sends some emojis\nSupported: amogus/amongus/among us, barry, biang, bruh/facepalm, surprised/that's illegal/illegal, void, woah\n(words separated by / output the same emoji)"
+    "Sends some emojis\nSupported: amogus/amongus/among us, barry, biang, bruh/facepalm, surprised/that's illegal/illegal, void, woah, shitting toothpaste\n(words separated by / output the same emoji)"
 )
 async def emoji(ctx, *, name):
 	name = name.lower()
