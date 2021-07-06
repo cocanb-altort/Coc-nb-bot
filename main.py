@@ -73,7 +73,7 @@ async def msgreturn(ctx, *, msg):
 
 @bot.command(name='minecraftinfo', help="Sends information for Minecraft server")
 async def minecraftinto(ctx):
-  await ctx.send('SERVER INFO:\nHostname: cocanb.aternos.me:59104\nIP: 51.158.122.83\nPort: 59104\n\nVersion: 1.17 Vanilla\nGamemode: Creative\nDifficulty: Normal')
+  await ctx.send('SERVER INFO:\nHostname: cocanb.aternos.me:59104\nIP: 51.158.122.83\nPort: 59104\n\nVersion: 1.17.1 Vanilla\nGamemode: Creative\nDifficulty: Normal')
 
 
 @bot.command(name="delreturn",help="Returns message (deletes original message)\n(may not work on every server)")
