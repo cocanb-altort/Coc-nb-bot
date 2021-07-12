@@ -77,7 +77,7 @@ async def minecraftinto(ctx):
 
 
 @bot.command(name="delreturn",help="Returns message (deletes original message)\n(may not work on every server)")
-async def delmsgreturn(ctx, *, msg):
+async def delreturn(ctx, *, msg):
 	await ctx.message.delete()
 	await ctx.send(msg)
 
