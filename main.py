@@ -32,9 +32,25 @@ async def on_ready():
   
 @bot.event
 async def on_message(message):
-    if message.content == "?" and message.author.id == 698865312954843216:
+  #idk how to do this
+  #if message.author.id == 807436687977611274 and " » c." in message.content:
+  #  await message.channel.send(message.content)
+  #  await message.edit(content='test')
+
+    #this bit of code is unrelated to the first part
+    #msglist = message.content.split(" » ")
+    #msglist.pop(0)
+    #msg = " » ".join(msglist)
+    #await bot.process_commands(msg)
+    #command = str(msg.split(" ")[0])
+    #query = " ".join(msg.split(" ")[1:])
+    #await message.channel.send(msg)
+    #await message.channel.send(command)
+    #await message.channel.send(query)
+    #await msg.invoke(get_command(command), query=query)
+  if message.content == "?" and message.author.id == 698865312954843216:
         await message.channel.send('shut the fuck up grogu you know what we were talking about stop acting stupid')
-    await bot.process_commands(message)
+  await bot.process_commands(message)
 
 @bot.command(name='ping', help="Checks whether bot is online.")
 async def ping(ctx):
