@@ -88,8 +88,8 @@ async def msgreturn(ctx, *, msg):
 	await ctx.send(msg)
 
 @bot.command(name='minecraftinfo', help="Sends information for Minecraft server")
-async def minecraftinto(ctx):
-  await ctx.send('SERVER INFO:\nHostname: cocanb.aternos.me:36520\nIP: 185.116.157.37\nPort: 36520\n\nVersion: PaperMC 1.17.1\nPlugins: DiscordSRV\nGamemode: Creative\nDifficulty: Normal')
+async def minecraftinfo(ctx):
+  await ctx.send('SERVER INFO:\nHostname: cocanb.aternos.me:36520\nIP: 185.116.157.37\nPort: 36520\n\nVersion: PaperMC 1.17.1\nPlugins: DiscordSRV, WorldEdit\nGamemode: Creative\nDifficulty: Normal')
 
 
 @bot.command(name="delreturn",help="Returns message (deletes original message)\n(may not work on every server)")
