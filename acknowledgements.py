@@ -7,12 +7,12 @@ class Acknowledgements(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
   
-  @bot.command (name='reclist', help='Sends a list of recommended servers (does not work on the Trouxth)')
-  async def recommended(self, ctx):
-    if ctx.guild.id == 793153755544813598:
-      pass
-    else:
-      await ctx.send ('https://docs.google.com/document/d/1_FyyY8d9SavNzU7AHD5q6FuBLW4Wr3CkRgfXhXfckRA/edit?usp=drivesdk')
+  #@bot.command (name='reclist', help='Sends a list of recommended servers (does not work on the Trouxth)')
+  #async def recommended(self, ctx):
+    #if ctx.guild.id == 793153755544813598:
+      #pass
+    #else:
+      #await ctx.send ('https://docs.google.com/document/d/1_FyyY8d9SavNzU7AHD5q6FuBLW4Wr3CkRgfXhXfckRA/edit?usp=drivesdk')
   
   @bot.command (name='server', help='Sends a link to the Cocánb server')
   async def server(self, ctx):
