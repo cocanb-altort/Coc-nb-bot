@@ -50,7 +50,7 @@ class Cocánb(commands.Cog):
     except:
       await ctx.send("Insufficient permissions.")
   
-  @bot.command(name="toc", help="In beta: Translates message into Cocánb (keeps original message)")
+  @bot.command(name="toc", help="Defunct: Translates message into Cocánb (keeps original message)")
   async def toc (self, ctx, *args):
     arg = ' '.join(args)
           
@@ -66,7 +66,7 @@ class Cocánb(commands.Cog):
     final = t.handleSentences(''.join(templ))
     await ctx.send(final)
   
-  @bot.command(name='toctest', help='In development')
+  @bot.command(name='toctest', help='Translates message into Cocánb (keeps original message) (Please use this command instead of c.toctest)')
   async def toctest(self, ctx, *, sentence):
     await ctx.send(translator.ctranslate(sentence))
     
