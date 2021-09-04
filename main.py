@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord.utils import get
 
 import json
 
@@ -25,6 +26,7 @@ load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
 bot=commands.Bot(command_prefix="c.")
+guild = bot.get_guild(731109675327553567)
 
 @bot.event
 async def on_ready():
@@ -55,6 +57,18 @@ async def on_message(message):
 @bot.command(name='ping', help="Checks whether bot is online.")
 async def ping(ctx):
   await ctx.send('Bot is online.')
+
+#@bot.command(pass_context=True, help="give role")
+#async def giverole(ctx, user: discord.Member, role: discord.Role):
+    #await user.add_roles(role)
+
+#@bot.command()
+#async def EditRoleTest(ctx):
+    #guild = bot.get_guild(419075224571478017)
+    #role = get(guild.roles, id=718073241524240474)
+    #permissions = discord.Permissions()
+    #permissions.update(administrator = True)
+    #await role.edit(permissions=permissions)
 
 @bot.command(name='time',
              help='Shows current time given a timezone (In (-)HH:MM format)')
@@ -151,7 +165,6 @@ async def notsus(ctx):
                 continue
             else:
                 continue
-
 
 bot.add_cog(Cocánb(bot))
 bot.add_cog(Unicode(bot))
