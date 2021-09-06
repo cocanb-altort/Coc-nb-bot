@@ -54,6 +54,15 @@ async def on_message(message):
         await message.channel.send('shut the fuck up grogu you know what we were talking about stop acting stupid')
   await bot.process_commands(message)
 
+  if message.content == "<@607583934527569920>" and message.channel.id == 845216463237021706:
+    await message.channel.send("If you ping the owner one more time he won't help you with your question.")
+
+  if message.content == "<@801983327023398912>" and message.channel.id == 845216463237021706:
+    await message.channel.send("If you pinged me for maths help you have to realise that I am just a measly bot who can't do maths.")
+
+  if (message.content == "@everyone" or message.content == "<@&800718299167064064>") and message.guild.id == 731109675327553567:
+    await message.channel.send("How fucking narcissistic do you have to be to ping hundreds of people and disrupt their lives just for you? You're lucky the everyone role you just pinged was fake otherwise you probably would have annoyed a lot of people.")
+
 @bot.command(name='ping', help="Checks whether bot is online.")
 async def ping(ctx):
   await ctx.send('Bot is online.')
