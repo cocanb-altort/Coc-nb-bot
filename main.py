@@ -13,6 +13,8 @@ from datetime import datetime, timedelta
 from time import localtime, strftime
 import time
 
+import math
+
 import cocanb
 
 from replit import db
@@ -164,6 +166,35 @@ async def ipa(ctx):
     with open("Resources/IPA_Kiel_2020_full.pdf", "rb") as file:
       await ctx.send("Official International Phonetic Alphabet Chart", file=discord.File(file, "Official International Phonetic Alphabet Chart.pdf"))
 
+@bot.command (name="latextransform", help="Linearly transform a piece of LaTeX code using a matrix\n\n Input the four entries of the transformation matrix in the following order: top left, bottom left, top right then bottom right, then the LaTeX code, each separated by spaces")
+async def latextransform (ctx, m00, m10, m01, m11, latex):
+  m00 = float (m00)
+  m10 = float (m10)
+  m01 = float (m01)
+  m11 = float (m11)
+
+  E = (m00 + m11) / 2
+  F = (m00 - m11) / 2
+  G = (m10 + m01) / 2
+  H = (m10 - m01) / 2
+
+  Q = math.sqrt (E**2 + H**2)
+  R = math.sqrt (F**2 + G**2)
+
+  sx = Q + R
+  sy = Q - R
+
+  a1 = math.atan2 (G,F)
+  a2 = math.atan2 (H,E)
+
+  theta = (a2 - a1) / 2
+  phi = (a2 + a1) / 2
+
+  theta_deg = theta * 180 / math.pi
+  phi_deg = phi * 180 / math.pi
+
+  await ctx.send ('```$\\rotatebox{'+str(phi_deg)+'}{$\\scalebox{'+str(sx)+'}['+str(sy)+']{$\\rotatebox{'+str(theta_deg)+'}{$'+latex+'$}$}$}$```')
+
 @bot.command(name="notsus")
 async def notsus(ctx):
     if ctx.author.id == 702746453927264276 or ctx.author.id == 607583934527569920:
@@ -175,6 +206,8 @@ async def notsus(ctx):
                 continue
             else:
                 continue
+
+                
 
 bot.add_cog(Cocánb(bot))
 bot.add_cog(Unicode(bot))
