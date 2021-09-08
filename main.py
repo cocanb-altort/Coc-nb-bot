@@ -167,7 +167,7 @@ async def ipa(ctx):
       await ctx.send("Official International Phonetic Alphabet Chart", file=discord.File(file, "Official International Phonetic Alphabet Chart.pdf"))
 
 @bot.command (name="latextransform", help="Linearly transform a piece of LaTeX code using a matrix\n\n Input the four entries of the transformation matrix in the following order: top left, bottom left, top right then bottom right, then the LaTeX code, each separated by spaces")
-async def latextransform (ctx, m00, m10, m01, m11, latex):
+async def latextransform (ctx, m00, m10, m01, m11, *, latex):
   m00 = float (m00)
   m10 = float (m10)
   m01 = float (m01)
