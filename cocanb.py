@@ -129,7 +129,7 @@ class Cocánb(commands.Cog):
     else:
       await ctx.send ('Invalid format')
   
-  @bot.command(name='language', help='Sends the name for "Cocánb" in different languages\n\nSupported languages: English, French, Spanish, Portugese, German, Swedish, Finnish, Czech, Polish, Traditional Chinese, Simplified Chinese, Japanese, Korean, Russian, Greek, Arabic, Devenagari, Malayalam, Cocánb')
+  @bot.command(name='language', help='Sends the name for "Cocánb" in different languages\n\nSupported languages: English, French, Spanish, Portugese, German, Swedish, Finnish, Czech, Polish, Traditional Chinese, Simplified Chinese, Japanese, Korean, Russian, Greek, Arabic, Sanskrit/Hindi Devenagari, Malayalam, Cocánb')
   async def language(self, ctx, lang):
     lang = lang.lower()
     if lang == "english":
@@ -164,8 +164,10 @@ class Cocánb(commands.Cog):
       await ctx.send("Κοκάνβ")
     elif lang == "arabic":
       await ctx.send("كُكَنب")
-    elif lang =="hindi" or lang == "devenagari":
+    elif lang =="sanskrit" or lang == "sanskrit devenagari":
       await ctx.send("कॉकॅन्ब्")
+    elif lang =="hindi" or lang == "hindi devenagari":
+      await ctx.send("कौकैन्ब")
     elif lang == "malayalam":
       await ctx.send("കോകാന്ബ്")
     elif lang == "cocanb" or lang == "cocánb":
