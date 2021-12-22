@@ -63,7 +63,7 @@ async def on_message(message):
   if message.content == "<@801983327023398912>" and message.channel.id == 845216463237021706:
     await message.channel.send("If you pinged me for maths help you have to realise that I am just a measly bot who can't do maths.")
 
-  if (message.content == "@everyone" or message.content == "<@&800718299167064064>") and message.guild.id == 731109675327553567:
+  if ("@everyone" in message.content or "<@&800718299167064064>"in message.content) and message.guild.id == 731109675327553567:
     await message.channel.send("How fucking narcissistic do you have to be to ping hundreds of people and disrupt their lives just for you? You're lucky the everyone role you just pinged was fake otherwise you probably would have annoyed a lot of people.")
 
 @bot.command(name='ping', help="Checks whether bot is online.")
@@ -107,6 +107,35 @@ async def time(ctx, timezone: str = '00:00'):
 		               plus + timezone + '`')
 	else:
 		await ctx.send ('invalid timezone')
+
+@bot.command(name='weekday', help="Returns day of the week for a given date (Format: DD MM YYYY)")
+async def weekday(ctx, day:int, month:int, year:int):
+  doomsday = {1:3, 2:28, 3:14, 4:4, 5:9, 6:6, 7:11, 8:8, 9:5, 10:10, 11:7, 12:12}
+  doomsday_leap = {1:4, 2:29, 3:14, 4:4, 5:9, 6:6, 7:11, 8:8, 9:5, 10:10, 11:7, 12:12}
+  if year % 4 == 0:
+    doomsday_offset = (day - doomsday_leap[month]) % 7
+  else: 
+    doomsday_offset = (day - doomsday[month]) % 7
+  
+  century_dict = {0:2, 1:0, 2:5, 3:3}
+  century_code = century_dict[int (year / 100) % 4]
+
+  num1 = int ((year % 100) / 12)
+  num2 = (year % 100) % 12
+  num3 = int (num2 / 4)
+
+  #print (doomsday_offset)
+  #print (century_code)
+  #print (num1)
+  #print (num2)
+  #print (num3)
+  #print ()
+
+  weekday = (doomsday_offset + century_code + num1 + num2 + num3) % 7
+  weekdays = {0:"Sunday", 1:"Monday", 2:"Tuesday", 3:"Wednesday", 4:"Thursday", 5:"Friday", 6:"Saturday"}
+  weekday = weekdays[weekday]
+  await ctx.send (weekday)
+
 		
 
 @bot.command(name="return", help="Returns message")

@@ -169,7 +169,9 @@ class Cocánb(commands.Cog):
     elif lang =="hindi" or lang == "hindi devenagari":
       await ctx.send("कौकैन्ब")
     elif lang == "malayalam":
-      await ctx.send("കോകാന്ബ്")
+      await ctx.send("കോകാൻബ്")
+    elif lang == "tamil":
+      await ctx.send("கோகான்பு")
     elif lang == "cocanb" or lang == "cocánb":
       await ctx.send("Cocánn onbf")
     else:
