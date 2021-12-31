@@ -110,31 +110,44 @@ async def time(ctx, timezone: str = '00:00'):
 
 @bot.command(name='weekday', help="Returns day of the week for a given date (Format: DD MM YYYY)")
 async def weekday(ctx, day:int, month:int, year:int):
-  doomsday = {1:3, 2:28, 3:14, 4:4, 5:9, 6:6, 7:11, 8:8, 9:5, 10:10, 11:7, 12:12}
-  doomsday_leap = {1:4, 2:29, 3:14, 4:4, 5:9, 6:6, 7:11, 8:8, 9:5, 10:10, 11:7, 12:12}
-  if year % 4 == 0:
-    doomsday_offset = (day - doomsday_leap[month]) % 7
-  else: 
-    doomsday_offset = (day - doomsday[month]) % 7
-  
-  century_dict = {0:2, 1:0, 2:5, 3:3}
-  century_code = century_dict[int (year / 100) % 4]
+#check if date is valid
+  if (year % 4 == 0 and year % 100 != 0) or year % 400 == 0:
+    month_length = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+  else:
+    month_length = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+  if month > 12:
+    await ctx.send ("Invalid date")
+  elif day > month_length[month-1]:
+    await ctx.send ("Invalid date")
 
-  num1 = int ((year % 100) / 12)
-  num2 = (year % 100) % 12
-  num3 = int (num2 / 4)
+  #conway's algorithm
+  else:
+    doomsday = {1:3, 2:28, 3:14, 4:4, 5:9, 6:6, 7:11, 8:8, 9:5, 10:10, 11:7, 12:12}
+    doomsday_leap = {1:4, 2:29, 3:14, 4:4, 5:9, 6:6, 7:11, 8:8, 9:5, 10:10, 11:7, 12:12}
+    if (year % 4 == 0 and year % 100 != 0) or year % 400 == 0:
+      #print ("leap_year")
+      doomsday_offset = (day - doomsday_leap[month]) % 7
+    else: 
+      doomsday_offset = (day - doomsday[month]) % 7
+    
+    century_dict = {0:2, 1:0, 2:5, 3:3}
+    century_code = century_dict[int (year / 100) % 4]
 
-  #print (doomsday_offset)
-  #print (century_code)
-  #print (num1)
-  #print (num2)
-  #print (num3)
-  #print ()
+    num1 = int ((year % 100) / 12)
+    num2 = (year % 100) % 12
+    num3 = int (num2 / 4)
 
-  weekday = (doomsday_offset + century_code + num1 + num2 + num3) % 7
-  weekdays = {0:"Sunday", 1:"Monday", 2:"Tuesday", 3:"Wednesday", 4:"Thursday", 5:"Friday", 6:"Saturday"}
-  weekday = weekdays[weekday]
-  await ctx.send (weekday)
+    #print (doomsday_offset)
+    #print (century_code)
+    #print (num1)
+    #print (num2)
+    #print (num3)
+    #print ()
+
+    weekday = (doomsday_offset + century_code + num1 + num2 + num3) % 7
+    weekdays = {0:"Sunday", 1:"Monday", 2:"Tuesday", 3:"Wednesday", 4:"Thursday", 5:"Friday", 6:"Saturday"}
+    weekday = weekdays[weekday]
+    await ctx.send (weekday)
 
 		
 
