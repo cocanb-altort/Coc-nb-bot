@@ -25,6 +25,8 @@ from unicode import Unicode
 from acknowledgements import Acknowledgements
 from moderation import Moderation
 
+import asyncio
+
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
@@ -69,8 +71,14 @@ async def on_message(message):
   if (message.guild.id == 932135849838129152 and message.author.id != 801983327023398912 and(message.content == '"' or message.content == '-' or message.content == '0' or message.content == '=' or message.content == "'" or ("'-'" in message.content and "c." not in message.content))):
     await message.delete() 
     await message.channel.send("cringe")
+    role = discord.utils.get(message.guild.roles, name="unbased")
+    await message.author.add_roles(role)
+    channel = bot.get_channel(932896343901478963)
+    await channel.send(f"You have been muted for 5 minutes lol <@{message.author.id}>")
+    await asyncio.sleep(300)
+    await message.author.remove_roles(role)
   
-  if message.author.id == 787576039093043202:
+  if message.channel.id == 932896343901478963 and message.author.id != 801983327023398912:
     await message.channel.send("The Industrial Revolution and its consequences have been a disaster for the human race. They have greatly increased the life-expectancy of those of us who live in “advanced” countries, but they have destabilized society, have made life unfulfilling, have subjected human beings to indignities, have led to widespread psychological suffering (in the Third World to physical suffering as well) and have inflicted severe damage on the natural world. The continued development of technology will worsen the situation. It will certainly subject human beings to greater indignities and inflict greater damage on the natural world, it will probably lead to greater social disruption and psychological suffering, and it may lead to increased physical suffering even in “advanced” countries.")
 
 
