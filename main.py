@@ -68,7 +68,7 @@ async def on_message(message):
   if ("@everyone" in message.content or "<@&800718299167064064>"in message.content) and message.guild.id == 731109675327553567:
     await message.channel.send("How fucking narcissistic do you have to be to ping hundreds of people and disrupt their lives just for you? You're lucky the everyone role you just pinged was fake otherwise you probably would have annoyed a lot of people.")
 
-  if (message.guild.id == 932135849838129152 and message.author.id != 801983327023398912 and(message.content == '"' or message.content == '-' or message.content == '0' or message.content == '=' or message.content == "'" or ("'-'" in message.content and "c." not in message.content))):
+  if (message.guild.id == 932135849838129152 and message.author.id != 801983327023398912 and(message.content == '"' or message.content == '-' or message.content == '0' or message.content == '=' or message.content == "'" or (("'-'" in message.content or '"/n0/n=' in message.content) and "c." not in message.content))):
     await message.delete() 
     await message.channel.send("cringe")
     role = discord.utils.get(message.guild.roles, name="unbased")
@@ -85,6 +85,30 @@ async def on_message(message):
 @bot.command(name='ping', help="Checks whether bot is online.")
 async def ping(ctx):
   await ctx.send('Bot is online.')
+
+@bot.command(pass_context=True)
+async def spam(ctx: commands.Context, count: int, *, message: str):
+    """
+    : Spam a message a set amount of times. Enter "stop" to stop the spam early
+
+    Args:
+        count (int): The number of times to spam the message
+        message (str): The message to spam
+    """
+    if ctx.message.author.id == 607583934527569920:
+      _spam = True
+      while _spam and count:
+          await ctx.send(message)
+
+          def check(msg: discord.Message):
+              return not msg.author.bot and msg.content.lower() == "stop"
+
+          try:
+              if await bot.wait_for("message", check=check, timeout=1.5):
+                  _spam = False
+                  await ctx.send("Okay I'm done now.")
+          except asyncio.TimeoutError:
+              count -= 1
 
 #@bot.command(pass_context=True, help="give role")
 #async def giverole(ctx, user: discord.Member, role: discord.Role):
