@@ -69,6 +69,9 @@ async def on_message(message):
   if (message.guild.id == 932135849838129152 and message.author.id != 801983327023398912 and(message.content == '"' or message.content == '-' or message.content == '0' or message.content == '=' or ("'-'" in message.content and "c." not in message.content))):
     await message.delete() 
     await message.channel.send("cringe")
+  
+  if message.author.id == 787576039093043202:
+    await message.channel.send(f"Fuck u, <@{message.author.id}> <3. I hope you die a horrible death on this cursed piece of shit Discord channel. lolollooloololool @here")
 
 
 @bot.command(name='ping', help="Checks whether bot is online.")
