@@ -74,7 +74,11 @@ async def on_message(message):
     role = discord.utils.get(message.guild.roles, name="unbased")
     await message.author.add_roles(role)
     channel = bot.get_channel(932896343901478963)
-    await channel.send(f"You have been muted for 5 minutes lol <@{message.author.id}>")
+    week_day = datetime.today().weekday()
+    weekdays = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+    week_day = weekdays[week_day]
+    muted_time = '`' + week_day + ', ' + str(datetime.today()) + ' UTC`'
+    await channel.send(f"You have been muted for 5 minutes lol <@{message.author.id}>\nThe time now is {muted_time}.")
     await asyncio.sleep(300)
     await message.author.remove_roles(role)
   
