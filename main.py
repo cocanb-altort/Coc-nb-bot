@@ -30,13 +30,21 @@ import asyncio
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
-bot=commands.Bot(command_prefix="c.")
+intents = discord.Intents.default()
+intents.members = True
+
+bot=commands.Bot(command_prefix="c.", intents=intents)
 guild = bot.get_guild(731109675327553567)
 
 @bot.event
 async def on_ready():
   await bot.change_presence(status=discord.Status.online, activity=discord.Game(name='c.help'))
   
+@bot.event
+async def on_member_join(member):
+    if member.guild.id == 932135849838129152:
+        await bot.get_channel(932135849838129155).send(f'Welcome to the BDSM server <@!{member.id}>! Send "0" for more information.')
+
 @bot.event
 async def on_message(message):
   #idk how to do this
@@ -84,8 +92,7 @@ async def on_message(message):
   
   if message.channel.id == 932896343901478963 and message.author.id != 801983327023398912:
     await message.channel.send(f"<@{message.author.id}>\nThe Industrial Revolution and its consequences have been a disaster for the human race. They have greatly increased the life-expectancy of those of us who live in “advanced” countries, but they have destabilized society, have made life unfulfilling, have subjected human beings to indignities, have led to widespread psychological suffering (in the Third World to physical suffering as well) and have inflicted severe damage on the natural world. The continued development of technology will worsen the situation. It will certainly subject human beings to greater indignities and inflict greater damage on the natural world, it will probably lead to greater social disruption and psychological suffering, and it may lead to increased physical suffering even in “advanced” countries.")
-
-
+    
 @bot.command(name='ping', help="Checks whether bot is online.")
 async def ping(ctx):
   await ctx.send('Bot is online.')
