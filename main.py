@@ -219,7 +219,7 @@ async def delreturn(ctx, *, msg):
 @bot.command(
     name="emoji",
     help=
-    "Sends some emojis\nSupported: amogus/amongus/among us, barry, biang, bruh/facepalm, surprised/that's illegal/illegal, void, woah, shitting toothpaste, dababy\n(words separated by / output the same emoji)"
+    "Sends some emojis\nSupported: amogus/amongus/among us, barry, biang, bruh/facepalm, surprised/that's illegal/illegal, void, woah, shitting toothpaste, dababy, troll/trollface\n(words separated by / output the same emoji)"
 )
 async def emoji(ctx, *, name):
 	name = name.lower()
@@ -243,6 +243,8 @@ async def emoji(ctx, *, name):
 	  await ctx.send("<:shittingtoothpaste:850006091827773441>")
 	elif name == "dababy":
 	  await ctx.send("<:dababy:850279101548855317>")
+	elif name == "troll" or name == "trollface":
+	  await ctx.send("<:trollface:934033439164878868>")
 	else:
 		await ctx.send("Invalid emoji")
 
