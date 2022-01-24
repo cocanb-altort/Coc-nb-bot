@@ -76,7 +76,7 @@ async def on_message(message):
   if ("@everyone" in message.content or "<@&800718299167064064>"in message.content) and message.guild.id == 731109675327553567:
     await message.channel.send("How fucking narcissistic do you have to be to ping hundreds of people and disrupt their lives just for you? You're lucky the everyone role you just pinged was fake otherwise you probably would have annoyed a lot of people.")
 
-  if (message.guild.id == 932135849838129152 and message.author.id != 801983327023398912 and(message.content == '"' or message.content == '-' or message.content == '0' or message.content == '=' or message.content == "'" or (("'-'" in message.content or '"\n0\n=' in message.content) and "c." not in message.content))):
+  if (message.guild.id == 932135849838129152 and message.author.id != 801983327023398912 and(message.content == '"' or message.content == '-' or message.content == '0' or message.content == '=' or message.content == "'" or message.content == "“" or (("'-'" in message.content or '"\n0\n=' in message.content) and "c." not in message.content))):
     await message.delete() 
     await message.channel.send("cringe")
     role = discord.utils.get(message.guild.roles, name="unbased")
