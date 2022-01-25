@@ -94,7 +94,7 @@ async def on_message(message):
     await asyncio.sleep(300)
     await message.author.remove_roles(role)
   
-  if message.channel.id == 932896343901478963 and message.author.id != 801983327023398912:
+  if message.channel.id == 932896343901478963 and message.author.id != 801983327023398912 and "c.kaczynski" not in message.content:
     #open quote file
     my_file = open("Resources/kaczynski_quotes.txt", "r")
     content = my_file.read()
