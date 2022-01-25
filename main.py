@@ -407,7 +407,7 @@ async def kaczynskidm (ctx, user: discord.User, paragraph:int):
       print (split_footnote)
       for i in split_footnote:
         i_newline = i.replace ("␤", "\n")
-        await user.send(i_newline)       
+        await user.send(i_newline)
 
 bot.add_cog(Cocánb(bot))
 bot.add_cog(Unicode(bot))
