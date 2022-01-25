@@ -370,6 +370,45 @@ async def kaczynski (ctx, paragraph:int):
         i_newline = i.replace ("␤", "\n")
         await ctx.send(i_newline)
 
+@bot.command (name="kaczynskidm", help="Sends part of Ted Kaczynski's manifesto to someone's dm given the paragraph number (Type 0 for a random paragraph) (Exclusive to the Based Discussions Surrounding Maths server)")
+@commands.has_role('Admin')
+async def kaczynskidm (ctx, user: discord.User, paragraph:int):
+  if paragraph not in range(0, 232):
+    await user.send("Out of range.")
+  else:
+    if paragraph == 0:
+      random_paragraph = True
+    else:
+      random_paragraph = False
+    #open quote file
+    my_file = open("Resources/kaczynski_quotes.txt", "r")
+    content = my_file.read()
+    content_list = content.split("\n\n")
+    my_file.close()
+    #choose paragraph
+    if random_paragraph == True:
+      chosen_quote = random.choice(content_list)
+    else:
+      chosen_quote = content_list[paragraph-1]
+    print (chosen_quote)
+    #separate footnotes
+    footnote_split = chosen_quote.split ("�")
+    chosen_quote = footnote_split[0]
+    footnote_split.pop(0)
+    print(footnote_split)
+    #split message if longer than 2000 characters and send
+    split_quote = textwrap.wrap(chosen_quote, 2000)
+    print (split_quote)
+    for i in split_quote:
+      await user.send (i)
+    #send footnotes and split them if too long
+    for i in footnote_split:
+      split_footnote = textwrap.wrap(i, 2000)
+      print (split_footnote)
+      for i in split_footnote:
+        i_newline = i.replace ("␤", "\n")
+        await user.send(i_newline)       
+
 bot.add_cog(Cocánb(bot))
 bot.add_cog(Unicode(bot))
 bot.add_cog(Acknowledgements(bot))
