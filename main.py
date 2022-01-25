@@ -15,6 +15,10 @@ import time
 
 import math
 
+import random
+
+import textwrap
+
 import cocanb
 
 from replit import db
@@ -91,7 +95,33 @@ async def on_message(message):
     await message.author.remove_roles(role)
   
   if message.channel.id == 932896343901478963 and message.author.id != 801983327023398912:
-    await message.channel.send(f"<@{message.author.id}>\nThe Industrial Revolution and its consequences have been a disaster for the human race. They have greatly increased the life-expectancy of those of us who live in “advanced” countries, but they have destabilized society, have made life unfulfilling, have subjected human beings to indignities, have led to widespread psychological suffering (in the Third World to physical suffering as well) and have inflicted severe damage on the natural world. The continued development of technology will worsen the situation. It will certainly subject human beings to greater indignities and inflict greater damage on the natural world, it will probably lead to greater social disruption and psychological suffering, and it may lead to increased physical suffering even in “advanced” countries.")
+    #open quote file
+    my_file = open("Resources/kaczynski_quotes.txt", "r")
+    content = my_file.read()
+    content_list = content.split("\n\n")
+    my_file.close()
+    #choose random paragraph
+    chosen_quote = random.choice(content_list)
+    print (chosen_quote)
+    #separate footnotes
+    footnote_split = chosen_quote.split ("�")
+    chosen_quote = footnote_split[0]
+    footnote_split.pop(0)
+    print(footnote_split)
+    #split message if longer than 2000 characters and send
+    split_quote = textwrap.wrap(chosen_quote, 2000)
+    print (split_quote)
+    await message.channel.send(f"<@{message.author.id}>")
+    for i in split_quote:
+      await message.channel.send (i)
+    #send footnotes and split them if too long
+    for i in footnote_split:
+      split_footnote = textwrap.wrap(i, 2000)
+      print (split_footnote)
+      for i in split_footnote:
+        i_newline = i.replace ("␤", "\n")
+        await message.channel.send(i_newline)
+      
     
 @bot.command(name='ping', help="Checks whether bot is online.")
 async def ping(ctx):
