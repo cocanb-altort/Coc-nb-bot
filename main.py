@@ -80,7 +80,7 @@ async def on_message(message):
   if ("@everyone" in message.content or "<@&800718299167064064>"in message.content) and message.guild.id == 731109675327553567:
     await message.channel.send("How fucking narcissistic do you have to be to ping hundreds of people and disrupt their lives just for you? You're lucky the everyone role you just pinged was fake otherwise you probably would have annoyed a lot of people.")
 
-  if (message.guild.id == 932135849838129152 and message.author.id != 801983327023398912 and(message.content == '"' or message.content == '-' or message.content == '0' or message.content == '=' or message.content == "'" or message.content == "“" or message.content == "”" or (("'-'" in message.content or '"\n0\n=' in message.content) and "c." not in message.content))):
+  if (message.guild.id == 932135849838129152 and message.author.id != 801983327023398912 and (message.content == '"' or message.content == '-' or message.content == '0' or message.content == '=' or message.content == "'" or message.content == "“" or message.content == "”" or (("'-'" in message.content or '"\n0\n=' in message.content) and "c." not in message.content))):
     await message.delete() 
     await message.channel.send("cringe")
     role = discord.utils.get(message.guild.roles, name="unbased")
@@ -332,10 +332,38 @@ async def notsus(ctx):
             else:
                 continue
 
-@bot.command (name="kaczynski", help="Sends part of Ted Kaczynski's manifesto given the paragraph number (Type 0 for a random paragraph)")
+@bot.command (name="kaczynski", help="Sends part of Ted Kaczynski's manifesto given the paragraph number (Type 0 for a random paragraph and any number NOT within the range of 0-232 for contents)")
 async def kaczynski (ctx, paragraph:int):
-  if paragraph not in range(0, 232):
-    await ctx.send("Out of range.")
+  if paragraph not in range(0, 233):
+    await ctx.send("""
+INDUSTRIAL SOCIETY AND ITS FUTURE
+Contents:
+1-5: Introduction
+6-9: THE PSYCHOLOGY OF MODERN LEFTISM
+10-23: FEELINGS OF INFERIORITY
+24-32: OVERSOCIALIZATION
+33-37: THE POWER PROCESS
+38-41: SURROGATE ACTIVITIES
+42-44: AUTONOMY
+45-58: SOURCES OF SOCIAL PROBLEMS
+59-76: DISRUPTION OF THE POWER PROCESS IN MODERN SOCIETY
+77-86: HOW SOME PEOPLE ADJUST
+87-92: THE MOTIVES OF SCIENTISTS
+93-98: THE NATURE OF FREEDOM
+99-113: SOME PRINCIPLES OF HISTORY
+114-120: RESTRICTION OF FREEDOM IS UNAVOIDABLE IN INDUSTRIAL SOCIETY
+121-124: THE ‘BAD’ PARTS OF TECHNOLOGY CANNOT BE SEPARATED FROM THE ‘GOOD’ PARTS
+125-135: TECHNOLOGY IS A MORE POWERFUL SOCIAL FORCE THAN THE ASPIRATION FOR FREEDOM
+136-139: SIMPLER SOCIAL PROBLEMS HAVE PROVED INTRACTABLE
+140-142: REVOLUTION IS EASIER THAN REFORM
+143-160: CONTROL OF HUMAN BEHAVIOR
+161-170: HUMAN RACE AT A CROSSROADS
+171-179: THE FUTURE
+180-206: STRATEGY
+207-212: TWO KINDS OF TECHNOLOGY
+213-230: THE DANGER OF LEFTISM
+231-232: FINAL NOTE
+""")
   else:
     if paragraph == 0:
       random_paragraph = True
@@ -370,44 +398,75 @@ async def kaczynski (ctx, paragraph:int):
         i_newline = i.replace ("␤", "\n")
         await ctx.send(i_newline)
 
-@bot.command (name="kaczynskidm", help="Sends part of Ted Kaczynski's manifesto to someone's dm given the paragraph number (Type 0 for a random paragraph) (Exclusive to the Based Discussions Surrounding Maths server)")
-@commands.has_role('Admin')
+@bot.command (name="kaczynskidm", help="Sends part of Ted Kaczynski's manifesto to someone's dm given the paragraph number (Type 0 for a random paragraph and any number NOT within the range of 0-232 for contents) (Only for admins and Cocánb Altort himself)")
 async def kaczynskidm (ctx, user: discord.User, paragraph:int):
-  if paragraph not in range(0, 232):
-    await user.send("Out of range.")
+  if ctx.message.author.guild_permissions.administrator or ctx.message.author.id == 607583934527569920:
+    if paragraph not in range(0, 233):
+      await user.send("""
+INDUSTRIAL SOCIETY AND ITS FUTURE
+Contents:
+1-5: Introduction
+6-9: THE PSYCHOLOGY OF MODERN LEFTISM
+10-23: FEELINGS OF INFERIORITY
+24-32: OVERSOCIALIZATION
+33-37: THE POWER PROCESS
+38-41: SURROGATE ACTIVITIES
+42-44: AUTONOMY
+45-58: SOURCES OF SOCIAL PROBLEMS
+59-76: DISRUPTION OF THE POWER PROCESS IN MODERN SOCIETY
+77-86: HOW SOME PEOPLE ADJUST
+87-92: THE MOTIVES OF SCIENTISTS
+93-98: THE NATURE OF FREEDOM
+99-113: SOME PRINCIPLES OF HISTORY
+114-120: RESTRICTION OF FREEDOM IS UNAVOIDABLE IN INDUSTRIAL SOCIETY
+121-124: THE ‘BAD’ PARTS OF TECHNOLOGY CANNOT BE SEPARATED FROM THE ‘GOOD’ PARTS
+125-135: TECHNOLOGY IS A MORE POWERFUL SOCIAL FORCE THAN THE ASPIRATION FOR FREEDOM
+136-139: SIMPLER SOCIAL PROBLEMS HAVE PROVED INTRACTABLE
+140-142: REVOLUTION IS EASIER THAN REFORM
+143-160: CONTROL OF HUMAN BEHAVIOR
+161-170: HUMAN RACE AT A CROSSROADS
+171-179: THE FUTURE
+180-206: STRATEGY
+207-212: TWO KINDS OF TECHNOLOGY
+213-230: THE DANGER OF LEFTISM
+231-232: FINAL NOTE
+  """)
+    else:
+      if paragraph == 0:
+        random_paragraph = True
+      else:
+        random_paragraph = False
+      #open quote file
+      my_file = open("Resources/kaczynski_quotes.txt", "r")
+      content = my_file.read()
+      content_list = content.split("\n\n")
+      my_file.close()
+      #choose paragraph
+      if random_paragraph == True:
+        chosen_quote = random.choice(content_list)
+      else:
+        chosen_quote = content_list[paragraph-1]
+      print (chosen_quote)
+      #separate footnotes
+      footnote_split = chosen_quote.split ("�")
+      chosen_quote = footnote_split[0]
+      footnote_split.pop(0)
+      print(footnote_split)
+      #split message if longer than 2000 characters and send
+      split_quote = textwrap.wrap(chosen_quote, 2000)
+      print (split_quote)
+      for i in split_quote:
+        await user.send (i)
+      #send footnotes and split them if too long
+      for i in footnote_split:
+        split_footnote = textwrap.wrap(i, 2000)
+        print (split_footnote)
+        for i in split_footnote:
+          i_newline = i.replace ("␤", "\n")
+          await user.send(i_newline)
   else:
-    if paragraph == 0:
-      random_paragraph = True
-    else:
-      random_paragraph = False
-    #open quote file
-    my_file = open("Resources/kaczynski_quotes.txt", "r")
-    content = my_file.read()
-    content_list = content.split("\n\n")
-    my_file.close()
-    #choose paragraph
-    if random_paragraph == True:
-      chosen_quote = random.choice(content_list)
-    else:
-      chosen_quote = content_list[paragraph-1]
-    print (chosen_quote)
-    #separate footnotes
-    footnote_split = chosen_quote.split ("�")
-    chosen_quote = footnote_split[0]
-    footnote_split.pop(0)
-    print(footnote_split)
-    #split message if longer than 2000 characters and send
-    split_quote = textwrap.wrap(chosen_quote, 2000)
-    print (split_quote)
-    for i in split_quote:
-      await user.send (i)
-    #send footnotes and split them if too long
-    for i in footnote_split:
-      split_footnote = textwrap.wrap(i, 2000)
-      print (split_footnote)
-      for i in split_footnote:
-        i_newline = i.replace ("␤", "\n")
-        await user.send(i_newline)
+    await ctx.send ("You do not have the permission to use this command.")
+
 
 bot.add_cog(Cocánb(bot))
 bot.add_cog(Unicode(bot))
