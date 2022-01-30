@@ -249,7 +249,7 @@ async def delreturn(ctx, *, msg):
 @bot.command(
     name="emoji",
     help=
-    "Sends some emojis\nSupported: amogus/amongus/among us, barry, biang, bruh/facepalm, surprised/that's illegal/illegal, void, woah, shitting toothpaste, dababy, troll/trollface\n(words separated by / output the same emoji)"
+    "Sends some emojis\nSupported: amogus/amongus/among us, barry, biang, bruh/facepalm, surprised/that's illegal/illegal, void, woah, shitting toothpaste, dababy, latex, troll/trollface\n(words separated by / output the same emoji)"
 )
 async def emoji(ctx, *, name):
 	name = name.lower()
@@ -273,6 +273,8 @@ async def emoji(ctx, *, name):
 	  await ctx.send("<:shittingtoothpaste:850006091827773441>")
 	elif name == "dababy":
 	  await ctx.send("<:dababy:850279101548855317>")
+	elif name == "latex":
+	  await ctx.send("<:latex1:846147354083328030><:latex2:846147354000359515>")
 	elif name == "troll" or name == "trollface":
 	  await ctx.send("<:trollface:934033439164878868>")
 	else:
@@ -467,7 +469,7 @@ Contents:
   else:
     await ctx.send ("You do not have the permission to use this command.")
 
-@bot.command (name="kaczynskifull", help="Sends Ted Kaczynski's full manifesto given the paragraph number (Only for Cocánb Altort)")
+@bot.command (name="kaczynskifull", help="Sends Ted Kaczynski's full manifesto (Can only be used by Cocánb Altort)")
 async def kaczynskifull (ctx):
   if ctx.message.author.id == 607583934527569920:
     await ctx.send("""
@@ -530,6 +532,70 @@ Contents:
         for i in split_footnote:
           i_newline = i.replace ("␤", "\n")
           await ctx.send(i_newline)
+
+@bot.command (name="kaczynskifulldm", help="Sends Ted Kaczynski's full manifesto to someone's dms (Can only be used by Cocánb Altort)")
+async def kaczynskifulldm (ctx, user: discord.User):
+  if ctx.message.author.id == 607583934527569920:
+    await user.send("""
+INDUSTRIAL SOCIETY AND ITS FUTURE
+Contents:
+1-5: Introduction
+6-9: THE PSYCHOLOGY OF MODERN LEFTISM
+10-23: FEELINGS OF INFERIORITY
+24-32: OVERSOCIALIZATION
+33-37: THE POWER PROCESS
+38-41: SURROGATE ACTIVITIES
+42-44: AUTONOMY
+45-58: SOURCES OF SOCIAL PROBLEMS
+59-76: DISRUPTION OF THE POWER PROCESS IN MODERN SOCIETY
+77-86: HOW SOME PEOPLE ADJUST
+87-92: THE MOTIVES OF SCIENTISTS
+93-98: THE NATURE OF FREEDOM
+99-113: SOME PRINCIPLES OF HISTORY
+114-120: RESTRICTION OF FREEDOM IS UNAVOIDABLE IN INDUSTRIAL SOCIETY
+121-124: THE ‘BAD’ PARTS OF TECHNOLOGY CANNOT BE SEPARATED FROM THE ‘GOOD’ PARTS
+125-135: TECHNOLOGY IS A MORE POWERFUL SOCIAL FORCE THAN THE ASPIRATION FOR FREEDOM
+136-139: SIMPLER SOCIAL PROBLEMS HAVE PROVED INTRACTABLE
+140-142: REVOLUTION IS EASIER THAN REFORM
+143-160: CONTROL OF HUMAN BEHAVIOR
+161-170: HUMAN RACE AT A CROSSROADS
+171-179: THE FUTURE
+180-206: STRATEGY
+207-212: TWO KINDS OF TECHNOLOGY
+213-230: THE DANGER OF LEFTISM
+231-232: FINAL NOTE
+""")
+    contents = {1:"Introduction",6:"THE PSYCHOLOGY OF MODERN LEFTISM",10:"FEELINGS OF INFERIORITY",24:"OVERSOCIALIZATION",33:"THE POWER PROCESS",38:"SURROGATE ACTIVITIES",42:"AUTONOMY",45:"SOURCES OF SOCIAL PROBLEMS",59:"DISRUPTION OF THE POWER PROCESS IN MODERN SOCIETY",77:"HOW SOME PEOPLE ADJUST",87:"THE MOTIVES OF SCIENTISTS",93:"THE NATURE OF FREEDOM",99:"SOME PRINCIPLES OF HISTORY",114:"RESTRICTION OF FREEDOM IS UNAVOIDABLE IN INDUSTRIAL SOCIETY",121:"THE ‘BAD’ PARTS OF TECHNOLOGY CANNOT BE SEPARATED FROM THE ‘GOOD’ PARTS",125:"TECHNOLOGY IS A MORE POWERFUL SOCIAL FORCE THAN THE ASPIRATION FOR FREEDOM",136:"SIMPLER SOCIAL PROBLEMS HAVE PROVED INTRACTABLE",140:"REVOLUTION IS EASIER THAN REFORM",143:"CONTROL OF HUMAN BEHAVIOR",161:"HUMAN RACE AT A CROSSROADS",171:"THE FUTURE",180:"STRATEGY",207:"TWO KINDS OF TECHNOLOGY",213:"THE DANGER OF LEFTISM",231:"FINAL NOTE"}
+    for i in range (1, 233):
+      if contents.get (i) is None:
+        pass
+      else:
+        await user.send (contents.get (i))
+      #open quote file
+      my_file = open("Resources/kaczynski_quotes.txt", "r")
+      content = my_file.read()
+      content_list = content.split("\n\n")
+      my_file.close()
+      #choose paragraph
+      chosen_quote = content_list[i-1]
+      #print (chosen_quote)
+      #separate footnotes
+      footnote_split = chosen_quote.split ("�")
+      chosen_quote = footnote_split[0]
+      footnote_split.pop(0)
+      #print(footnote_split)
+      #split message if longer than 2000 characters and send
+      split_quote = textwrap.wrap(chosen_quote, 2000)
+      #print (split_quote)
+      for i in split_quote:
+        await user.send (i)
+      #send footnotes and split them if too long
+      for i in footnote_split:
+        split_footnote = textwrap.wrap(i, 2000)
+        #print (split_footnote)
+        for i in split_footnote:
+          i_newline = i.replace ("␤", "\n")
+          await user.send(i_newline)
 
 bot.add_cog(Cocánb(bot))
 bot.add_cog(Unicode(bot))
