@@ -46,8 +46,16 @@ async def on_ready():
   
 @bot.event
 async def on_member_join(member):
-    if member.guild.id == 932135849838129152:
-        await bot.get_channel(932135849838129155).send(f'Welcome to the BDSM server <@!{member.id}>! Send "0" for more information.')
+  if member.guild.id == 932135849838129152:
+    await bot.get_channel(932135849838129155).send(f'Welcome to the BDSM server <@!{member.id}>! Send "0" for more information.')
+
+  if member.guild.id == 731109675327553567:
+    await bot.get_channel(731109675327553571).send(f"<@!{member.id}>, welcome!\nIf you\'re here for maths help, go to <#845216463237021706> and just send the question you need help with, otherwise, we won\'t answer you.")
+
+@bot.event
+async def on_member_remove(member):
+  if member.guild.id == 731109675327553567:
+    await bot.get_channel(731109675327553571).send(f"Not again, <@!{member}> left\nNôa ğaí, <@!{member}> le f'nontč nètđ\nID: {member.id}")
 
 @bot.event
 async def on_message(message):
