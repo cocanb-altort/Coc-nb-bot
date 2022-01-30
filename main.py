@@ -55,7 +55,7 @@ async def on_member_join(member):
 @bot.event
 async def on_member_remove(member):
   if member.guild.id == 731109675327553567:
-    await bot.get_channel(731109675327553571).send(f"Not again, <@!{member}> left\nNôa ğaí, <@!{member}> le f'nontč nètđ\nID: {member.id}")
+    await bot.get_channel(731109675327553571).send(f"Not again, {member} left\nNôa ğaí, {member} le f'nontč nètđ\nID: {member.id}")
 
 @bot.event
 async def on_message(message):
