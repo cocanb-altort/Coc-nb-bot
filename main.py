@@ -131,9 +131,9 @@ async def on_message(message):
         await message.channel.send(i_newline)
       
     
-@bot.command(name='ping', help="Checks whether bot is online.")
-async def ping(ctx):
-  await ctx.send('Bot is online.')
+@bot.command(name='ping', help="Checks whether bot is online and return latency time.")
+async def ping(ctx: commands.Context):
+    await ctx.send(f"Bot is online.\nPing: {bot.latency * 1000}ms")
 
 @bot.command(pass_context=True)
 async def spam(ctx: commands.Context, count: int, *, message: str):
