@@ -131,6 +131,11 @@ async def on_message(message):
       for i in split_footnote:
         i_newline = i.replace ("␤", "\n")
         await message.channel.send(i_newline)
+
+  if message.guild.id == 419075224571478017 and message.author.id == 937280621095575563:
+    await message.delete()
+    
+
       
     
 @bot.command(name='ping', help="Checks whether bot is online and return latency time.")
