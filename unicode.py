@@ -4,6 +4,8 @@ from discord.ext import commands
 from unicodedata import *
 import unicodedata
 
+import textwrap
+
 bot = commands.Bot(command_prefix='c.', description='A bot for members of the Cocánb')
 
 class Unicode(commands.Cog):
@@ -22,35 +24,34 @@ class Unicode(commands.Cog):
 
   @bot.command(name='tocode', help='Converts character to unicode codepoint')
   async def tocode (self, ctx, *, character):
-    try:
-      characters = list(character)
-      responses = list()
-      for i in range(len(characters)):
-        if len(characters[i]) == 3 and  characters[i][0] == '`' and characters[i][2] == '`':
-          characters[i] = characters[i][1]
-        elif len(character) == 7 and characters[i][0:3] == '```' and characters[i][4:7] == '```':
-          characters[i] = characters[i][3]
-        else: 
-          characters[i] = characters[i]
-        response = hex(ord(characters[i]))
-        response = response[2:]
-        if len (response) == 1:
-          response = '000' + response
-        elif len (response) == 2:
-          response = '00' + response
-        elif len (response) == 3:
-          response = '0' + response
-        elif len (response) == 5:
-          response = '0' + response
-        else:
-          pass
-        code = response
-        response = code.upper()
-        responses.append(response)
-      responses = ' '.join(responses)
-      await ctx.send('```' + responses + '```')
-    except:
-      await ctx.send('Character limit reached.')
+    characters = list(character)
+    responses = list()
+    for i in range(len(characters)):
+      if len(characters[i]) == 3 and  characters[i][0] == '`' and characters[i][2] == '`':
+        characters[i] = characters[i][1]
+      elif len(character) == 7 and characters[i][0:3] == '```' and characters[i][4:7] == '```':
+        characters[i] = characters[i][3]
+      else: 
+        characters[i] = characters[i]
+      response = hex(ord(characters[i]))
+      response = response[2:]
+      if len (response) == 1:
+        response = '000' + response
+      elif len (response) == 2:
+        response = '00' + response
+      elif len (response) == 3:
+        response = '0' + response
+      elif len (response) == 5:
+        response = '0' + response
+      else:
+        pass
+      code = response
+      response = code.upper()
+      responses.append(response)
+    responses = ' '.join(responses)
+    responses_extra = textwrap.wrap(responses, 1994)
+    for i in responses_extra:
+      await ctx.send ('```'+i+'```')
   
   
   @bot.command(name='todesc', help='Converts unicode codepoint to description')
