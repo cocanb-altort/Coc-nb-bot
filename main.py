@@ -299,9 +299,15 @@ async def customemoji(ctx, name, emoji_id, animated: str = ''):
   await ctx.send(f'<{anim}:{name}:{emoji_id}>')
 
 @bot.command(name='ipa', help='Sends official International Phonetic Alphabet chart')
-async def ipa(ctx):
-    with open("Resources/IPA_Kiel_2020_full.pdf", "rb") as file:
+async def ipa(ctx, format: str = 'pdf'):
+  if format == 'pdf':
+    with open("Resources/IPA charts/IPA_Kiel_2020_full.pdf", "rb") as file:
       await ctx.send("Official International Phonetic Alphabet Chart", file=discord.File(file, "Official International Phonetic Alphabet Chart.pdf"))
+  elif format == 'png':
+    with open("Resources/IPA charts/IPA_Kiel_2020_full-1.png", "rb") as file:
+      await ctx.send("Official International Phonetic Alphabet Chart", file=discord.File(file, "Official International Phonetic Alphabet Chart.png"))
+  else:
+    await ctx.send ("Invalid format")
 
 @bot.command (name="latextransform", help="Linearly transform a piece of LaTeX code using a matrix\n\n Input the four entries of the transformation matrix in the following order: top left, bottom left, top right then bottom right, then the LaTeX code, each separated by spaces")
 async def latextransform (ctx, m00, m10, m01, m11, *, latex):
