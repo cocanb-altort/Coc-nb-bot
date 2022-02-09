@@ -353,6 +353,7 @@ async def notsus(ctx):
 @bot.command (name="kaczynski", help="Sends part of Ted Kaczynski's manifesto given the paragraph number (Type 0 for a random paragraph and any number NOT within the range of 0-232 for contents)")
 async def kaczynski (ctx, paragraph:int):
   if paragraph not in range(0, 233):
+
     await ctx.send("""
 INDUSTRIAL SOCIETY AND ITS FUTURE
 Contents:
@@ -419,6 +420,7 @@ Contents:
 @bot.command (name="kaczynskidm", help="Sends part of Ted Kaczynski's manifesto to someone's dm given the paragraph number (Type 0 for a random paragraph and any number NOT within the range of 0-232 for contents) (Only for admins and Cocánb Altort himself)")
 async def kaczynskidm (ctx, user: discord.User, paragraph:int):
   if ctx.message.author.guild_permissions.administrator or ctx.message.author.id == 607583934527569920:
+    await ctx.send (f"Messaged <@{user.id}>.")
     if paragraph not in range(0, 233):
       await user.send("""
 INDUSTRIAL SOCIETY AND ITS FUTURE
@@ -552,6 +554,7 @@ Contents:
 @bot.command (name="kaczynskifulldm", help="Sends Ted Kaczynski's full manifesto to someone's dms (Can only be used by Cocánb Altort)")
 async def kaczynskifulldm (ctx, user: discord.User):
   if ctx.message.author.id == 607583934527569920:
+    await ctx.send (f"Messaged <@{user.id}>.")
     await user.send("""
 INDUSTRIAL SOCIETY AND ITS FUTURE
 Contents:
