@@ -489,7 +489,7 @@ Contents:
 
 @bot.command (name="kaczynskifull", help="Sends Ted Kaczynski's full manifesto (Can only be used by Cocánb Altort)")
 async def kaczynskifull (ctx):
-  if ctx.message.author.id == 607583934527569920:
+  if ctx.message.author.guild_permissions.administrator or ctx.message.author.id == 607583934527569920:
     await ctx.send("""
 INDUSTRIAL SOCIETY AND ITS FUTURE
 Contents:
@@ -553,7 +553,7 @@ Contents:
 
 @bot.command (name="kaczynskifulldm", help="Sends Ted Kaczynski's full manifesto to someone's dms (Can only be used by Cocánb Altort)")
 async def kaczynskifulldm (ctx, user: discord.User):
-  if ctx.message.author.id == 607583934527569920:
+  if ctx.message.author.id == 607583934527569920 or ctx.message.author.id == 509239077212782592:
     await ctx.send (f"Messaged <@{user.id}>.")
     await user.send("""
 INDUSTRIAL SOCIETY AND ITS FUTURE
