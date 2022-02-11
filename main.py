@@ -616,6 +616,12 @@ Contents:
           i_newline = i.replace ("␤", "\n")
           await user.send(i_newline)
 
+@bot.command(name='count', help='Counts (start and end inclusive)')
+async def count(ctx, start:int, stop:int, *,step:int=1):
+  if ctx.message.author.id == 607583934527569920 or ctx.message.author.id == 509239077212782592:
+    for i in range(start, stop+1, step):
+      await ctx.send(i)
+
 bot.add_cog(Cocánb(bot))
 bot.add_cog(Unicode(bot))
 bot.add_cog(Acknowledgements(bot))
