@@ -47,10 +47,17 @@ async def on_ready():
 @bot.event
 async def on_member_join(member):
   if member.guild.id == 932135849838129152:
-    await bot.get_channel(932135849838129155).send(f'Welcome to the BDSM server <@!{member.id}>! Send "0" for more information.')
+    await bot.get_channel(932135849838129155).send(f'Welcome to the BDSM server <@!{member.id}>!')
+    await bot.get_channel(942683791753887804).send(f'Welcome to the BDSM server <@!{member.id}>! You will stay here for 10 minutes before you can be released into the rest of the channels.')
+    role = discord.utils.get(member.server.roles, id="942683891200819213")
+    await bot.add_roles(member, role)
+    await asyncio.sleep (600)
+    await bot.remove_roles(member, role)
 
   if member.guild.id == 731109675327553567:
     await bot.get_channel(731109675327553571).send(f"<@!{member.id}>, welcome!\nIf you\'re here for maths help, go to <#845216463237021706> and just send the question you need help with, otherwise, we won\'t answer you.")
+    role = discord.utils.get(member.server.roles, id="942683891200819213")
+    await bot.add_roles(member, role)
 
 @bot.event
 async def on_member_remove(member):
@@ -90,21 +97,21 @@ async def on_message(message):
   if ("@everyone" in message.content or "<@&800718299167064064>"in message.content) and message.guild.id == 731109675327553567:
     await message.channel.send("How fucking narcissistic do you have to be to ping hundreds of people and disrupt their lives just for you? You're lucky the everyone role you just pinged was fake otherwise you probably would have annoyed a lot of people.")
 
-  if (message.guild.id == 932135849838129152 and message.author.id != 801983327023398912 and (message.content == '"' or message.content == '-' or message.content == '0' or message.content == '=' or message.content == "'" or message.content == "“" or message.content == "”" or (("'-'" in message.content or '"\n0\n=' in message.content) and "c." not in message.content))):
-    await message.delete() 
-    await message.channel.send("cringe")
-    role = discord.utils.get(message.guild.roles, name="unbased")
-    await message.author.add_roles(role)
-    channel = bot.get_channel(932896343901478963)
-    week_day = datetime.today().weekday()
-    weekdays = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
-    week_day = weekdays[week_day]
-    muted_time = '`' + week_day + ', ' + str(datetime.today()) + ' UTC`'
-    await channel.send(f"You have been muted for 5 minutes lol <@{message.author.id}>\nThe time now is {muted_time}.")
-    await asyncio.sleep(300)
-    await message.author.remove_roles(role)
+  #if (message.guild.id == 932135849838129152 and message.author.id != 801983327023398912 and (message.content == '"' or message.content == '-' or message.content == '0' or message.content == '=' or message.content == "'" or message.content == "“" or message.content == "”" or (("'-'" in message.content or '"\n0\n=' in message.content) and "c." not in message.content))):
+    #await message.delete() 
+    #await message.channel.send("cringe")
+    #role = discord.utils.get(message.guild.roles, name="unbased")
+    #await message.author.add_roles(role)
+    #channel = bot.get_channel(932896343901478963)
+    #week_day = datetime.today().weekday()
+    #weekdays = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+    #week_day = weekdays[week_day]
+    #muted_time = '`' + week_day + ', ' + str(datetime.today()) + ' UTC`'
+    #await channel.send(f"You have been muted for 5 minutes lol <@{message.author.id}>\nThe time now is {muted_time}.")
+    #await asyncio.sleep(300)
+    #await message.author.remove_roles(role)
   
-  if message.channel.id == 932896343901478963 and message.author.id != 801983327023398912 and "c.kaczynski" not in message.content:
+  if (message.channel.id == 932896343901478963 or message.channel.id == 942683791753887804) and message.author.id != 801983327023398912 and "c.kaczynski" not in message.content:
     #open quote file
     my_file = open("Resources/kaczynski_quotes.txt", "r")
     content = my_file.read()
