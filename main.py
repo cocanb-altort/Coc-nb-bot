@@ -12,6 +12,7 @@ from unicodedata import *
 from datetime import datetime, timedelta
 from time import localtime, strftime
 import time
+import pytz
 
 import math
 
@@ -181,30 +182,40 @@ async def spam(ctx: commands.Context, count: int, *, message: str):
     #await role.edit(permissions=permissions)
 
 @bot.command(name='time',
-             help='Shows current time given a timezone (In (-)HH:MM format)')
-async def time(ctx, timezone: str = '00:00'):
-	if timezone[0] == '-':
-		hours = int(timezone[:-3]) - int(timezone[-2:]) / 60
-	else:
-		hours = int(timezone[:-3]) + int(timezone[-2:]) / 60
-	future_time = datetime.today() + timedelta(hours=hours)
-	if timezone == '00:00':
-		plus = '±'
-	elif timezone[0] == '-':
-		plus = ''
-	elif timezone[0] == '+':
-		plus = ''
-	else:
-		plus = '+'
-	week_day = future_time.weekday()
-	weekdays = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
-	            "Saturday", "Sunday")
-	week_day = weekdays[week_day]
-	if timezone[-3] == ':':
-		await ctx.send('`' + week_day + ', ' + str(future_time) + ', UTC' +
-		               plus + timezone + '`')
-	else:
-		await ctx.send ('invalid timezone')
+             help='Shows current time given a timezone (In (-)HH:MM format).\n\nAlternatively, type "c.time tz <tz database name>" for a region\'s time. (A list of tz database names can be found here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List)')
+async def time(ctx, timezone: str = '00:00', tz_name: str='null'):
+
+  try:
+    if timezone == "tz":
+      utc_offset = str(datetime.now(pytz.timezone(tz_name)).strftime('%z'))
+      timezone = utc_offset[:3]+":"+utc_offset[3:]
+    else:
+      timezone = timezone
+      
+    if timezone[0] == '-':
+      hours = int(timezone[:-3]) - int(timezone[-2:]) / 60
+    else:
+      hours = int(timezone[:-3]) + int(timezone[-2:]) / 60
+    future_time = datetime.today() + timedelta(hours=hours)
+    if timezone == '00:00':
+      plus = '±'
+    elif timezone[0] == '-':
+      plus = ''
+    elif timezone[0] == '+':
+      plus = ''
+    else:
+      plus = '+'
+    week_day = future_time.weekday()
+    weekdays = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+                "Saturday", "Sunday")
+    week_day = weekdays[week_day]
+    if timezone[-3] == ':':
+      await ctx.send('`' + week_day + ', ' + str(future_time) + ', UTC' +
+                     plus + timezone + '`')
+    else:
+      await ctx.send ('invalid timezone')
+  except:
+    await ctx.send ('invalid timezone')
 
 @bot.command(name='weekday', help="Returns day of the week for a given date (Format: DD MM YYYY)")
 async def weekday(ctx, day:int, month:int, year:int):
@@ -247,11 +258,11 @@ async def weekday(ctx, day:int, month:int, year:int):
     weekday = weekdays[weekday]
     await ctx.send (weekday)
 
-		
+    
 
 @bot.command(name="return", help="Returns message")
 async def msgreturn(ctx, *, msg):
-	await ctx.send(msg)
+  await ctx.send(msg)
 
 @bot.command(name='minecraftinfo', help="Sends information for Minecraft server")
 async def minecraftinfo(ctx):
@@ -260,8 +271,8 @@ async def minecraftinfo(ctx):
 
 @bot.command(name="delreturn",help="Returns message (deletes original message)\n(may not work on every server)")
 async def delreturn(ctx, *, msg):
-	await ctx.message.delete()
-	await ctx.send(msg)
+  await ctx.message.delete()
+  await ctx.send(msg)
 
 @bot.command(
     name="emoji",
@@ -269,33 +280,33 @@ async def delreturn(ctx, *, msg):
     "Sends some emojis\nSupported: amogus/amongus/among us, barry, biang, bruh/facepalm, surprised/that's illegal/illegal, void, woah, shitting toothpaste, dababy, latex, troll/trollface\n(words separated by / output the same emoji)"
 )
 async def emoji(ctx, *, name):
-	name = name.lower()
-	if name == "ye":
-		await ctx.send("<:ye:799291949273317377>")
-	elif name == "amogus" or name == "amongus" or name == "among us":
-		await ctx.send("<:amogus:809427238784860210>")
-	elif name == "barry":
-		await ctx.send("<:barry:811154017672757270>")
-	elif name == "biang":
-		await ctx.send("<:biang:809669658143227905>")
-	elif name == "bruh" or name == "facepalm":
-		await ctx.send("<:bruh:801100506251526145>")
-	elif name == "surprised" or name == "that's illegal" or name == "illegal":
-		await ctx.send("<:surprised:801099678988501072>")
-	elif name == "void":
-		await ctx.send("<:void:798150976191201313>")
-	elif name == "woah":
-		await ctx.send("<:woah:807905973162999818>")
-	elif name == "shitting toothpaste":
-	  await ctx.send("<:shittingtoothpaste:850006091827773441>")
-	elif name == "dababy":
-	  await ctx.send("<:dababy:850279101548855317>")
-	elif name == "latex":
-	  await ctx.send("<:latex1:846147354083328030><:latex2:846147354000359515>")
-	elif name == "troll" or name == "trollface":
-	  await ctx.send("<:trollface:934033439164878868>")
-	else:
-		await ctx.send("Invalid emoji")
+  name = name.lower()
+  if name == "ye":
+    await ctx.send("<:ye:799291949273317377>")
+  elif name == "amogus" or name == "amongus" or name == "among us":
+    await ctx.send("<:amogus:809427238784860210>")
+  elif name == "barry":
+    await ctx.send("<:barry:811154017672757270>")
+  elif name == "biang":
+    await ctx.send("<:biang:809669658143227905>")
+  elif name == "bruh" or name == "facepalm":
+    await ctx.send("<:bruh:801100506251526145>")
+  elif name == "surprised" or name == "that's illegal" or name == "illegal":
+    await ctx.send("<:surprised:801099678988501072>")
+  elif name == "void":
+    await ctx.send("<:void:798150976191201313>")
+  elif name == "woah":
+    await ctx.send("<:woah:807905973162999818>")
+  elif name == "shitting toothpaste":
+    await ctx.send("<:shittingtoothpaste:850006091827773441>")
+  elif name == "dababy":
+    await ctx.send("<:dababy:850279101548855317>")
+  elif name == "latex":
+    await ctx.send("<:latex1:846147354083328030><:latex2:846147354000359515>")
+  elif name == "troll" or name == "trollface":
+    await ctx.send("<:trollface:934033439164878868>")
+  else:
+    await ctx.send("Invalid emoji")
 
 @bot.command(name='customemoji', help='Sends custom emoji not in c.emoji list\n(Emoji must be from a server this bot is in)')
 async def customemoji(ctx, name, emoji_id, animated: str = ''):
