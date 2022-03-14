@@ -182,7 +182,7 @@ async def spam(ctx: commands.Context, count: int, *, message: str):
     #await role.edit(permissions=permissions)
 
 @bot.command(name='time',
-             help='Shows current time given a timezone (In (-)HH:MM format).\n\nAlternatively, type "c.time tz <tz database name>" for a region\'s time. (A list of tz database names can be found here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List)')
+             help='Shows current time given a timezone (In (-)HH:MM format).\n\nAlternatively, type "c.time tz <tz database name>" for a region\'s time. A list of tz database names can be found here:``` https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List ```')
 async def time(ctx, timezone: str = '00:00', tz_name: str='null'):
 
   try:
