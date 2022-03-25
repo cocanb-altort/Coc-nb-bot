@@ -98,7 +98,7 @@ async def on_message(message):
   if ("@everyone" in message.content or "<@&800718299167064064>"in message.content) and message.guild.id == 731109675327553567:
     await message.channel.send("How fucking narcissistic do you have to be to ping hundreds of people and disrupt their lives just for you? You're lucky the everyone role you just pinged was fake otherwise you probably would have annoyed a lot of people.")
 
-  if "https://media.discordapp.com/attachments/815786765863354369/938226387381284894/lobber.gif" in message.content:
+  if "lobber.gif" in message.content:
     await message.delete()
     await message.channel.send("shut the fuck up")
 
