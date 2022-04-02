@@ -637,6 +637,24 @@ Contents:
           i_newline = i.replace ("␤", "\n")
           await user.send(i_newline)
 
+@bot.command (name='quran', help="Sends a verse from al-Qurʾān given the sūrah and ʾāyah numbers")
+async def quranfulldm(ctx, sūrah:int, ʾāyah:int):
+  my_file = open("Resources/quran_arabic.txt", "r")
+  content = my_file.read()
+  sūrah_list = content.split("\n\n")
+  my_file.close()
+  try:
+    sūrah_0 = sūrah_list[sūrah-1]
+    ʾāyah_list = sūrah_0.split("\n")
+    ʾāyah_0 = ʾāyah_list[ʾāyah-1]
+
+    offset = len(str(sūrah))+len(str(ʾāyah))+2
+    number = "sūrah " + str(sūrah) + " ʾāyah " + str(ʾāyah) + "\n"
+    
+    await ctx.send (number+ʾāyah_0[offset:])
+  except:
+    await ctx.send("Invalid sūrah or ʾāyah number.")
+
 @bot.command(name='count', help='Counts (start and end inclusive)')
 async def count(ctx, start:int, stop:int, *,step:int=1):
   if ctx.message.author.id == 607583934527569920 or ctx.message.author.id == 509239077212782592:
