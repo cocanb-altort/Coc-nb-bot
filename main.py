@@ -655,6 +655,11 @@ async def quranfulldm(ctx, sūrah:int, ʾāyah:int):
   except:
     await ctx.send("Invalid sūrah or ʾāyah number.")
 
+@bot.command(name='quranfull', help='Sends al-Qurʾān in full as a text file')
+async def quranfull(ctx):
+  with open("Resources/quran_arabic.txt", "rb") as file:
+    await ctx.send("al-Qurʾān", file=discord.File(file, "quran_arabic.txt"))
+
 @bot.command(name='count', help='Counts (start and end inclusive)')
 async def count(ctx, start:int, stop:int, *,step:int=1):
   if ctx.message.author.id == 607583934527569920 or ctx.message.author.id == 509239077212782592:
