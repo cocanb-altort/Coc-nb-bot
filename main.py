@@ -508,7 +508,7 @@ Contents:
   else:
     await ctx.send ("You do not have the permission to use this command.")
 
-@bot.command (name="kaczynskifull", help="Sends Ted Kaczynski's full manifesto (Can only be used by Cocánb Altort)")
+@bot.command (name="kaczynskifull", help="Sends Ted Kaczynski's full manifesto (Can only be used by Cocánb Altort and people with administrator permissions)")
 async def kaczynskifull (ctx):
   if ctx.message.author.guild_permissions.administrator or ctx.message.author.id == 607583934527569920:
     await ctx.send("""
