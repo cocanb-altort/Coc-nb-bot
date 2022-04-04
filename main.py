@@ -508,6 +508,7 @@ Contents:
   else:
     await ctx.send ("You do not have the permission to use this command.")
 
+kaczynskifullstop = False
 @bot.command (name="kaczynskifull", help="Sends Ted Kaczynski's full manifesto (Can only be used by Cocánb Altort and people with administrator permissions)")
 async def kaczynskifull (ctx):
   if ctx.message.author.guild_permissions.administrator or ctx.message.author.id == 607583934527569920:
@@ -541,37 +542,45 @@ Contents:
 231-232: FINAL NOTE
 """)
     contents = {1:"Introduction",6:"THE PSYCHOLOGY OF MODERN LEFTISM",10:"FEELINGS OF INFERIORITY",24:"OVERSOCIALIZATION",33:"THE POWER PROCESS",38:"SURROGATE ACTIVITIES",42:"AUTONOMY",45:"SOURCES OF SOCIAL PROBLEMS",59:"DISRUPTION OF THE POWER PROCESS IN MODERN SOCIETY",77:"HOW SOME PEOPLE ADJUST",87:"THE MOTIVES OF SCIENTISTS",93:"THE NATURE OF FREEDOM",99:"SOME PRINCIPLES OF HISTORY",114:"RESTRICTION OF FREEDOM IS UNAVOIDABLE IN INDUSTRIAL SOCIETY",121:"THE ‘BAD’ PARTS OF TECHNOLOGY CANNOT BE SEPARATED FROM THE ‘GOOD’ PARTS",125:"TECHNOLOGY IS A MORE POWERFUL SOCIAL FORCE THAN THE ASPIRATION FOR FREEDOM",136:"SIMPLER SOCIAL PROBLEMS HAVE PROVED INTRACTABLE",140:"REVOLUTION IS EASIER THAN REFORM",143:"CONTROL OF HUMAN BEHAVIOR",161:"HUMAN RACE AT A CROSSROADS",171:"THE FUTURE",180:"STRATEGY",207:"TWO KINDS OF TECHNOLOGY",213:"THE DANGER OF LEFTISM",231:"FINAL NOTE"}
-    for i in range (1, 233):
-      if contents.get (i) is None:
-        pass
-      else:
-        await ctx.send (contents.get (i))
-      #open quote file
-      my_file = open("Resources/kaczynski_quotes.txt", "r")
-      content = my_file.read()
-      content_list = content.split("\n\n")
-      my_file.close()
-      #choose paragraph
-      chosen_quote = content_list[i-1]
-      #print (chosen_quote)
-      #separate footnotes
-      footnote_split = chosen_quote.split ("�")
-      chosen_quote = footnote_split[0]
-      footnote_split.pop(0)
-      #print(footnote_split)
-      #split message if longer than 2000 characters and send
-      split_quote = textwrap.wrap(chosen_quote, 2000)
-      #print (split_quote)
-      for i in split_quote:
-        await ctx.send (i)
-      #send footnotes and split them if too long
-      for i in footnote_split:
-        split_footnote = textwrap.wrap(i, 2000)
-        #print (split_footnote)
-        for i in split_footnote:
-          i_newline = i.replace ("␤", "\n")
-          await ctx.send(i_newline)
 
+    global kaczynskifullstop
+    kaczynskifullstop = False
+    
+    for i in range (1, 233):
+      if kaczynskifullstop == False:
+        if contents.get (i) is None:
+          pass
+        else:
+          await ctx.send (contents.get (i))
+        #open quote file
+        my_file = open("Resources/kaczynski_quotes.txt", "r")
+        content = my_file.read()
+        content_list = content.split("\n\n")
+        my_file.close()
+        #choose paragraph
+        chosen_quote = content_list[i-1]
+        #print (chosen_quote)
+        #separate footnotes
+        footnote_split = chosen_quote.split ("�")
+        chosen_quote = footnote_split[0]
+        footnote_split.pop(0)
+        #print(footnote_split)
+        #split message if longer than 2000 characters and send
+        split_quote = textwrap.wrap(chosen_quote, 2000)
+        #print (split_quote)
+        for i in split_quote:
+          await ctx.send (i)
+        #send footnotes and split them if too long
+        for i in footnote_split:
+          split_footnote = textwrap.wrap(i, 2000)
+          #print (split_footnote)
+          for i in split_footnote:
+            i_newline = i.replace ("␤", "\n")
+            await ctx.send(i_newline)
+      else:
+        break
+
+kaczynskifulldmstop = False
 @bot.command (name="kaczynskifulldm", help="Sends Ted Kaczynski's full manifesto to someone's dms (Can only be used by Cocánb Altort)")
 async def kaczynskifulldm (ctx, user: discord.User):
   if ctx.message.author.id == 607583934527569920 or ctx.message.author.id == 509239077212782592:
@@ -606,37 +615,44 @@ Contents:
 231-232: FINAL NOTE
 """)
     contents = {1:"Introduction",6:"THE PSYCHOLOGY OF MODERN LEFTISM",10:"FEELINGS OF INFERIORITY",24:"OVERSOCIALIZATION",33:"THE POWER PROCESS",38:"SURROGATE ACTIVITIES",42:"AUTONOMY",45:"SOURCES OF SOCIAL PROBLEMS",59:"DISRUPTION OF THE POWER PROCESS IN MODERN SOCIETY",77:"HOW SOME PEOPLE ADJUST",87:"THE MOTIVES OF SCIENTISTS",93:"THE NATURE OF FREEDOM",99:"SOME PRINCIPLES OF HISTORY",114:"RESTRICTION OF FREEDOM IS UNAVOIDABLE IN INDUSTRIAL SOCIETY",121:"THE ‘BAD’ PARTS OF TECHNOLOGY CANNOT BE SEPARATED FROM THE ‘GOOD’ PARTS",125:"TECHNOLOGY IS A MORE POWERFUL SOCIAL FORCE THAN THE ASPIRATION FOR FREEDOM",136:"SIMPLER SOCIAL PROBLEMS HAVE PROVED INTRACTABLE",140:"REVOLUTION IS EASIER THAN REFORM",143:"CONTROL OF HUMAN BEHAVIOR",161:"HUMAN RACE AT A CROSSROADS",171:"THE FUTURE",180:"STRATEGY",207:"TWO KINDS OF TECHNOLOGY",213:"THE DANGER OF LEFTISM",231:"FINAL NOTE"}
-    for i in range (1, 233):
-      if contents.get (i) is None:
-        pass
-      else:
-        await user.send (contents.get (i))
-      #open quote file
-      my_file = open("Resources/kaczynski_quotes.txt", "r")
-      content = my_file.read()
-      content_list = content.split("\n\n")
-      my_file.close()
-      #choose paragraph
-      chosen_quote = content_list[i-1]
-      #print (chosen_quote)
-      #separate footnotes
-      footnote_split = chosen_quote.split ("�")
-      chosen_quote = footnote_split[0]
-      footnote_split.pop(0)
-      #print(footnote_split)
-      #split message if longer than 2000 characters and send
-      split_quote = textwrap.wrap(chosen_quote, 2000)
-      #print (split_quote)
-      for i in split_quote:
-        await user.send (i)
-      #send footnotes and split them if too long
-      for i in footnote_split:
-        split_footnote = textwrap.wrap(i, 2000)
-        #print (split_footnote)
-        for i in split_footnote:
-          i_newline = i.replace ("␤", "\n")
-          await user.send(i_newline)
 
+    global kaczynskifulldmstop
+    kaczynskifulldm = False
+    
+    for i in range (1, 233):
+      if kaczynskifulldmstop == False:
+        if contents.get (i) is None:
+          pass
+        else:
+          await user.send (contents.get (i))
+        #open quote file
+        my_file = open("Resources/kaczynski_quotes.txt", "r")
+        content = my_file.read()
+        content_list = content.split("\n\n")
+        my_file.close()
+        #choose paragraph
+        chosen_quote = content_list[i-1]
+        #print (chosen_quote)
+        #separate footnotes
+        footnote_split = chosen_quote.split ("�")
+        chosen_quote = footnote_split[0]
+        footnote_split.pop(0)
+        #print(footnote_split)
+        #split message if longer than 2000 characters and send
+        split_quote = textwrap.wrap(chosen_quote, 2000)
+        #print (split_quote)
+        for i in split_quote:
+          await user.send (i)
+        #send footnotes and split them if too long
+        for i in footnote_split:
+          split_footnote = textwrap.wrap(i, 2000)
+          #print (split_footnote)
+          for i in split_footnote:
+            i_newline = i.replace ("␤", "\n")
+            await user.send(i_newline)
+      else:
+        break
+      
 @bot.command (name='quran', help="Sends a verse from al-Qurʾān given the sūrah and ʾāyah numbers")
 async def quranfulldm(ctx, sūrah:int, ʾāyah:int):
   my_file = open("Resources/quran_arabic.txt", "r")
@@ -660,16 +676,80 @@ async def quranfulldm(ctx, sūrah:int, ʾāyah:int):
   except:
     await ctx.send("Invalid sūrah or ʾāyah number.")
 
-@bot.command(name='quranfull', help='Sends al-Qurʾān in full as a text file')
-async def quranfull(ctx):
+@bot.command(name='quranfulltxt', help='Sends al-Qurʾān in full as a text file')
+async def quranfulltext(ctx):
   with open("Resources/quran_arabic.txt", "rb") as file:
     await ctx.send("al-Qurʾān", file=discord.File(file, "quran_arabic.txt"))
 
+quranfullmsgstop = False
+@bot.command(name='quranfullmsg', help="Sends al-Qurʾān in full as messages (Warning: Takes more than 1 hour and 45 minutes to complete)")
+async def quranfullmsg(ctx):
+  if ctx.message.author.id == 607583934527569920:
+    my_file = open("Resources/quran_arabic.txt", "r")
+    content = my_file.read()
+    ayah_list = content.split("\n")
+    my_file.close()
+
+    my_file = open("Resources/quran_surah_names.txt", "r")
+    content_1 = my_file.read()
+    surah_list = content_1.split("\n")
+    my_file.close()
+    
+    surah = 1
+    #arabic_numerals = {'0': '٠', '1': '١', '2':'٢', '3':'٣', '4':'٤', '5':'٥', '6':'٦', '7':'٧', '8':'٨', '9':'٩'}
+
+    global quranfullmsgstop
+    quranfullmsgstop = False
+    
+    await ctx.send ("Sūrah 1 (Al-Fatihah)")
+    for i in range (1, 100):
+      if quranfullmsgstop == False:
+        if ayah_list[i-1] == "":
+          await ctx.send ("ㅤ\nSūrah "+str(surah+1)+" ("+surah_list[surah]+")")
+          if surah == 8:
+            pass
+          else:
+            await ctx.send ("بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ")
+          surah += 1
+        else:
+          ayah_split = ayah_list[i-1].split('|')
+          ayah_number = ayah_split[1]
+          ayah = ayah_split[-1]
+          await ctx.send (ayah_number + ' ' + ayah)
+      else:
+        break
+
+countstop = False
 @bot.command(name='count', help='Counts (start and end inclusive)')
 async def count(ctx, start:int, stop:int, *,step:int=1):
   if ctx.message.author.id == 607583934527569920 or ctx.message.author.id == 509239077212782592:
+    global countstop
+    countstop = False
+    
     for i in range(start, stop+1, step):
-      await ctx.send(i)
+      if countstop == False:
+        await ctx.send(i)
+      else:
+        break
+
+@bot.command(name='stop', help='Stops a spamming command given the command name (there might be a few second delay), works for kaczynskifull, kaczynskifulldm, quranfullmsg, count')
+async def stop(ctx, command):
+  if command == 'quranfullmsg':
+    global quranfullmsgstop
+    quranfullmsgstop = True
+    await ctx.send ("c.quranfullmsg stopped")
+  if command == 'kaczynskifull':
+    global kaczynskifullstop
+    kaczynskifullstop = True
+    await ctx.send ("c.kaczynskifull stopped")
+  if command == 'kaczynskifulldm':
+    global kaczynskifulldmstop
+    kaczynskifulldmstop = True
+    await ctx.send ("c.kaczynskidmfull stopped")
+  if command == 'count':
+    global countstop
+    countstop = True
+    await ctx.send ("c.count stopped")
 
 bot.add_cog(Cocánb(bot))
 bot.add_cog(Unicode(bot))
