@@ -664,7 +664,7 @@ async def quran(ctx, sūrah:int, ʾāyah:int):
     ʾāyah_list = sūrah_0.split("\n")
     ʾāyah_0 = ʾāyah_list[ʾāyah-1]
 
-    my_file = open("Resources/quran_surah_names.txt", "r")
+    my_file = open("Resources/quran_sūrah_names.txt", "r")
     content_1 = my_file.read()
     sūrah_name_list = content_1.split("\n")
     sūrah_name = sūrah_name_list[sūrah-1]
@@ -687,15 +687,15 @@ async def quranfullmsg(ctx):
   if ctx.message.author.id == 607583934527569920 or ctx.message.author.guild_permissions.administrator:
     my_file = open("Resources/quran_arabic.txt", "r")
     content = my_file.read()
-    ayah_list = content.split("\n")
+    ʾāyah_list = content.split("\n")
     my_file.close()
 
-    my_file = open("Resources/quran_surah_names.txt", "r")
+    my_file = open("Resources/quran_sūrah_names.txt", "r")
     content_1 = my_file.read()
-    surah_list = content_1.split("\n")
+    sūrah_list = content_1.split("\n")
     my_file.close()
     
-    surah = 1
+    sūrah = 1
     #arabic_numerals = {'0': '٠', '1': '١', '2':'٢', '3':'٣', '4':'٤', '5':'٥', '6':'٦', '7':'٧', '8':'٨', '9':'٩'}
 
     global quranfullmsgstop
@@ -704,18 +704,18 @@ async def quranfullmsg(ctx):
     await ctx.send ("Sūrah 1 (Al-Fatihah)")
     for i in range (1, 100):
       if quranfullmsgstop == False:
-        if ayah_list[i-1] == "":
-          await ctx.send ("ㅤ\nSūrah "+str(surah+1)+" ("+surah_list[surah]+")")
-          if surah == 8:
+        if ʾāyah_list[i-1] == "":
+          await ctx.send ("ㅤ\nSūrah "+str(sūrah+1)+" ("+sūrah_list[sūrah]+")")
+          if sūrah == 8:
             pass
           else:
             await ctx.send ("بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ")
-          surah += 1
+          sūrah += 1
         else:
-          ayah_split = ayah_list[i-1].split('|')
-          ayah_number = ayah_split[1]
-          ayah = ayah_split[-1]
-          await ctx.send (ayah_number + ' ' + ayah)
+          ʾāyah_split = ʾāyah_list[i-1].split('|')
+          ʾāyah_number = ʾāyah_split[1]
+          ʾāyah = ʾāyah_split[-1]
+          await ctx.send (ʾāyah_number + ' ' + ʾāyah)
       else:
         break
 
@@ -727,14 +727,14 @@ async def quranfulldm (ctx, user: discord.User):
     
     my_file = open("Resources/quran_arabic.txt", "r")
     content = my_file.read()
-    ayah_list = content.split("\n")
+    ʾāyah_list = content.split("\n")
     my_file.close()
-    my_file = open("Resources/quran_surah_names.txt", "r")
+    my_file = open("Resources/quran_sūrah_names.txt", "r")
     content_1 = my_file.read()
-    surah_list = content_1.split("\n")
+    sūrah_list = content_1.split("\n")
     my_file.close()
     
-    surah = 1
+    sūrah = 1
     #arabic_numerals = {'0': '٠', '1': '١', '2':'٢', '3':'٣', '4':'٤', '5':'٥', '6':'٦', '7':'٧', '8':'٨', '9':'٩'}
 
     global quranfulldmstop
@@ -743,18 +743,18 @@ async def quranfulldm (ctx, user: discord.User):
     await user.send ("Sūrah 1 (Al-Fatihah)")
     for i in range (1, 100):
       if quranfulldmstop == False:
-        if ayah_list[i-1] == "":
-          await user.send ("ㅤ\nSūrah "+str(surah+1)+" ("+surah_list[surah]+")")
-          if surah == 8:
+        if ʾāyah_list[i-1] == "":
+          await user.send ("ㅤ\nSūrah "+str(sūrah+1)+" ("+sūrah_list[sūrah]+")")
+          if sūrah == 8:
             pass
           else:
             await user.send ("بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ")
-          surah += 1
+          sūrah += 1
         else:
-          ayah_split = ayah_list[i-1].split('|')
-          ayah_number = ayah_split[1]
-          ayah = ayah_split[-1]
-          await user.send (ayah_number + ' ' + ayah)
+          ʾāyah_split = ʾāyah_list[i-1].split('|')
+          ʾāyah_number = ʾāyah_split[1]
+          ʾāyah = ʾāyah_split[-1]
+          await user.send (ʾāyah_number + ' ' + ʾāyah)
       else:
         break
 
