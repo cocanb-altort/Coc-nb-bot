@@ -648,8 +648,13 @@ async def quranfulldm(ctx, sūrah:int, ʾāyah:int):
     ʾāyah_list = sūrah_0.split("\n")
     ʾāyah_0 = ʾāyah_list[ʾāyah-1]
 
+    my_file = open("Resources/quran_surah_names.txt", "r")
+    content_1 = my_file.read()
+    sūrah_name_list = content_1.split("\n")
+    sūrah_name = sūrah_name_list[sūrah-1]
+
     offset = len(str(sūrah))+len(str(ʾāyah))+2
-    number = "sūrah " + str(sūrah) + " ʾāyah " + str(ʾāyah) + "\n"
+    number = "Sūrah " + str(sūrah) + " (" + sūrah_name + ") ʾĀyah " + str(ʾāyah) + "\n"
     
     await ctx.send (number+ʾāyah_0[offset:])
   except:
