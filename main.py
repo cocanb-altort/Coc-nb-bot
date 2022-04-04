@@ -722,7 +722,7 @@ async def quranfullmsg(ctx):
 quranfulldmstop = False
 @bot.command(name='quranfulldm', help="Sends al-Qurʾān in full as messages in someone's dms (Warning: Takes more than 1 hour and 45 minutes to complete)")
 async def quranfulldm (ctx, user: discord.User):
-  if ctx.message.author.id == 607583934527569920 or ctx.message.author.guild_permissions.administrator:
+  if ctx.message.author.id == 607583934527569920 or ctx.message.author.id == 509239077212782592:
     await ctx.send (f"Messaged <@{user.id}> al-Qurʾān.")
     
     my_file = open("Resources/quran_arabic.txt", "r")
