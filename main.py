@@ -702,7 +702,7 @@ async def quranfullmsg(ctx):
     quranfullmsgstop = False
     
     await ctx.send ("Sūrah 1 (Al-Fatihah)")
-    for i in range (1, 100):
+    for i in range (1, 6350):
       if quranfullmsgstop == False:
         if ʾāyah_list[i-1] == "":
           await ctx.send ("ㅤ\nSūrah "+str(sūrah+1)+" ("+sūrah_list[sūrah]+")")
@@ -741,7 +741,7 @@ async def quranfulldm (ctx, user: discord.User):
     quranfulldmstop = False
     
     await user.send ("Sūrah 1 (Al-Fatihah)")
-    for i in range (1, 100):
+    for i in range (1, 6350):
       if quranfulldmstop == False:
         if ʾāyah_list[i-1] == "":
           await user.send ("ㅤ\nSūrah "+str(sūrah+1)+" ("+sūrah_list[sūrah]+")")
