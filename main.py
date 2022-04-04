@@ -584,7 +584,7 @@ kaczynskifulldmstop = False
 @bot.command (name="kaczynskifulldm", help="Sends Ted Kaczynski's full manifesto to someone's dms (Can only be used by Cocánb Altort)")
 async def kaczynskifulldm (ctx, user: discord.User):
   if ctx.message.author.id == 607583934527569920 or ctx.message.author.id == 509239077212782592:
-    await ctx.send (f"Messaged <@{user.id}>.")
+    await ctx.send (f"Messaged <@{user.id}> the Unabomber Manifesto.")
     await user.send("""
 INDUSTRIAL SOCIETY AND ITS FUTURE
 Contents:
@@ -654,7 +654,7 @@ Contents:
         break
       
 @bot.command (name='quran', help="Sends a verse from al-Qurʾān given the sūrah and ʾāyah numbers")
-async def quranfulldm(ctx, sūrah:int, ʾāyah:int):
+async def quran(ctx, sūrah:int, ʾāyah:int):
   my_file = open("Resources/quran_arabic.txt", "r")
   content = my_file.read()
   sūrah_list = content.split("\n\n")
@@ -684,7 +684,7 @@ async def quranfulltext(ctx):
 quranfullmsgstop = False
 @bot.command(name='quranfullmsg', help="Sends al-Qurʾān in full as messages (Warning: Takes more than 1 hour and 45 minutes to complete)")
 async def quranfullmsg(ctx):
-  if ctx.message.author.id == 607583934527569920:
+  if ctx.message.author.id == 607583934527569920 or ctx.message.author.guild_permissions.administrator:
     my_file = open("Resources/quran_arabic.txt", "r")
     content = my_file.read()
     ayah_list = content.split("\n")
@@ -719,6 +719,45 @@ async def quranfullmsg(ctx):
       else:
         break
 
+quranfulldmstop = False
+@bot.command(name='quranfulldm', help="Sends al-Qurʾān in full as messages in someone's dms (Warning: Takes more than 1 hour and 45 minutes to complete)")
+async def quranfulldm (ctx, user: discord.User):
+  if ctx.message.author.id == 607583934527569920 or ctx.message.author.guild_permissions.administrator:
+    await ctx.send (f"Messaged <@{user.id}> al-Qurʾān.")
+    
+    my_file = open("Resources/quran_arabic.txt", "r")
+    content = my_file.read()
+    ayah_list = content.split("\n")
+    my_file.close()
+    my_file = open("Resources/quran_surah_names.txt", "r")
+    content_1 = my_file.read()
+    surah_list = content_1.split("\n")
+    my_file.close()
+    
+    surah = 1
+    #arabic_numerals = {'0': '٠', '1': '١', '2':'٢', '3':'٣', '4':'٤', '5':'٥', '6':'٦', '7':'٧', '8':'٨', '9':'٩'}
+
+    global quranfulldmstop
+    quranfulldmstop = False
+    
+    await user.send ("Sūrah 1 (Al-Fatihah)")
+    for i in range (1, 100):
+      if quranfulldmstop == False:
+        if ayah_list[i-1] == "":
+          await user.send ("ㅤ\nSūrah "+str(surah+1)+" ("+surah_list[surah]+")")
+          if surah == 8:
+            pass
+          else:
+            await user.send ("بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ")
+          surah += 1
+        else:
+          ayah_split = ayah_list[i-1].split('|')
+          ayah_number = ayah_split[1]
+          ayah = ayah_split[-1]
+          await user.send (ayah_number + ' ' + ayah)
+      else:
+        break
+
 countstop = False
 @bot.command(name='count', help='Counts (start and end inclusive)')
 async def count(ctx, start:int, stop:int, *,step:int=1):
@@ -734,22 +773,29 @@ async def count(ctx, start:int, stop:int, *,step:int=1):
 
 @bot.command(name='stop', help='Stops a spamming command given the command name (there might be a few second delay), works for kaczynskifull, kaczynskifulldm, quranfullmsg, count')
 async def stop(ctx, command):
-  if command == 'quranfullmsg':
-    global quranfullmsgstop
-    quranfullmsgstop = True
-    await ctx.send ("c.quranfullmsg stopped")
-  if command == 'kaczynskifull':
-    global kaczynskifullstop
-    kaczynskifullstop = True
-    await ctx.send ("c.kaczynskifull stopped")
-  if command == 'kaczynskifulldm':
-    global kaczynskifulldmstop
-    kaczynskifulldmstop = True
-    await ctx.send ("c.kaczynskidmfull stopped")
-  if command == 'count':
-    global countstop
-    countstop = True
-    await ctx.send ("c.count stopped")
+  if ctx.message.author.id == 607583934527569920 or ctx.message.author.guild_permissions.administrator:
+    if command == 'kaczynskifull':
+      global kaczynskifullstop
+      kaczynskifullstop = True
+      await ctx.send ("c.kaczynskifull stopped")
+    elif command == 'kaczynskifulldm':
+      global kaczynskifulldmstop
+      kaczynskifulldmstop = True
+      await ctx.send ("c.kaczynskidmfull stopped")
+    elif command == 'quranfullmsg':
+      global quranfullmsgstop
+      quranfullmsgstop = True
+      await ctx.send ("c.quranfullmsg stopped")
+    elif command == 'quranfulldm':
+      global quranfulldmstop
+      quranfulldmstop = True
+      await ctx.send ("c.quranfulldm stopped")
+    elif command == 'count':
+      global countstop
+      countstop = True
+      await ctx.send ("c.count stopped")
+    else:
+      await ctx.send ("Command either does not exist or is not supported by c.stop.")
 
 bot.add_cog(Cocánb(bot))
 bot.add_cog(Unicode(bot))
