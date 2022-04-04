@@ -771,31 +771,55 @@ async def count(ctx, start:int, stop:int, *,step:int=1):
       else:
         break
 
+stopenabled = True
 @bot.command(name='stop', help='Stops a spamming command given the command name (there might be a few second delay), works for kaczynskifull, kaczynskifulldm, quranfullmsg, count')
 async def stop(ctx, command):
-  if ctx.message.author.id == 607583934527569920 or ctx.message.author.id == 509239077212782592 or ctx.message.author.guild_permissions.administrator:
-    if command == 'kaczynskifull':
-      global kaczynskifullstop
-      kaczynskifullstop = True
-      await ctx.send ("c.kaczynskifull stopped")
-    elif command == 'kaczynskifulldm':
-      global kaczynskifulldmstop
-      kaczynskifulldmstop = True
-      await ctx.send ("c.kaczynskidmfull stopped")
-    elif command == 'quranfullmsg':
-      global quranfullmsgstop
-      quranfullmsgstop = True
-      await ctx.send ("c.quranfullmsg stopped")
-    elif command == 'quranfulldm':
-      global quranfulldmstop
-      quranfulldmstop = True
-      await ctx.send ("c.quranfulldm stopped")
-    elif command == 'count':
-      global countstop
-      countstop = True
-      await ctx.send ("c.count stopped")
+  global stopenabled
+  if stopenabled == True:
+    if ctx.message.author.id == 607583934527569920 or ctx.message.author.id == 509239077212782592 or ctx.message.author.guild_permissions.administrator:
+      if command == 'kaczynskifull':
+        global kaczynskifullstop
+        kaczynskifullstop = True
+        await ctx.send ("c.kaczynskifull stopped")
+      elif command == 'kaczynskifulldm':
+        global kaczynskifulldmstop
+        kaczynskifulldmstop = True
+        await ctx.send ("c.kaczynskidmfull stopped")
+      elif command == 'quranfullmsg':
+        global quranfullmsgstop
+        quranfullmsgstop = True
+        await ctx.send ("c.quranfullmsg stopped")
+      elif command == 'quranfulldm':
+        global quranfulldmstop
+        quranfulldmstop = True
+        await ctx.send ("c.quranfulldm stopped")
+      elif command == 'count':
+        global countstop
+        countstop = True
+        await ctx.send ("c.count stopped")
+      else:
+        await ctx.send ("Command either does not exist or is not supported by c.stop.")
+  else:
+    await ctx.send ("c.stop is currently disabled.")
+
+@bot.command(name='stoptoggle', help='Toggles between whether c.stop works or not (Only usable by Cocánb Altort)\n\nThe <stoptoggle> argument can be either \'enable\', \'disable\' or \'query\' and the command resets every time the bot is restarted.')
+async def stoptoggle(ctx, stoptoggle):
+  global stopenabled
+  if ctx.message.author.id == 607583934527569920:
+    if stoptoggle == 'enable':
+      stopenabled = True
+      await ctx.send("c.stop enabled.")
+    elif stoptoggle == 'disable':
+      stopenabled = False
+      await ctx.send("c.stop disabled.")
+    elif stoptoggle == 'query':
+      if stopenabled == True:
+        await ctx.send ("c.stop is enabled.")
+      if stopenabled == False:
+        await ctx.send ("c.stop is disabled.")
     else:
-      await ctx.send ("Command either does not exist or is not supported by c.stop.")
+      await ctx.send ("Invalid input")
+  
 
 bot.add_cog(Cocánb(bot))
 bot.add_cog(Unicode(bot))
