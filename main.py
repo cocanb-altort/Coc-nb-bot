@@ -773,7 +773,7 @@ async def count(ctx, start:int, stop:int, *,step:int=1):
 
 @bot.command(name='stop', help='Stops a spamming command given the command name (there might be a few second delay), works for kaczynskifull, kaczynskifulldm, quranfullmsg, count')
 async def stop(ctx, command):
-  if ctx.message.author.id == 607583934527569920 or ctx.message.author.guild_permissions.administrator:
+  if ctx.message.author.id == 607583934527569920 or ctx.message.author.id == 509239077212782592 or ctx.message.author.guild_permissions.administrator:
     if command == 'kaczynskifull':
       global kaczynskifullstop
       kaczynskifullstop = True
