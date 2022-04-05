@@ -867,7 +867,7 @@ async def quran(ctx, sūrah: int, ʾāyah: int):
 @bot.command(name='quranfulltxt',
              help='Sends al-Qurʾān in full as a text file')
 async def quranfulltext(ctx):
-    with open("Resources/quran_arabic.txt", "rb") as file:
+    with open("Resources/al-Qurʾān.txt", "rb") as file:
         await ctx.send("al-Qurʾān",
                        file=discord.File(file, "quran_arabic.txt"))
 
@@ -1045,6 +1045,47 @@ async def stoptoggle(ctx, stoptoggle):
         else:
             await ctx.send("Invalid input")
 
+'''
+@bot.command(name='temp', help="temp")
+async def temp(ctx):
+    if ctx.message.author.id == 607583934527569920:
+
+        my_file = open("Resources/quran_arabic.txt", "r")
+        content = my_file.read()
+        ʾāyah_list = content.split("\n")
+        my_file.close()
+        my_file = open("Resources/quran_sūrah_names.txt", "r")
+        content_1 = my_file.read()
+        sūrah_list = content_1.split("\n")
+        my_file.close()
+
+        sūrah = 1
+        #arabic_numerals = {'0': '٠', '1': '١', '2':'٢', '3':'٣', '4':'٤', '5':'٥', '6':'٦', '7':'٧', '8':'٨', '9':'٩'}
+
+        with open('Resources/al-Qurʾān.txt', 'a') as f:
+            f.write('Sūrah 1 (Al-Fatihah)\n')
+        for i in range(1, 6350):
+            if quranfulldmstop == False:
+                if ʾāyah_list[i - 1] == "":
+                    with open('Resources/al-Qurʾān.txt', 'a') as f:
+                        f.write("\nSūrah " + str(sūrah + 1) + " (" +
+                                sūrah_list[sūrah] + ")\n")
+                    if sūrah == 8:
+                        pass
+                    else:
+                        with open('Resources/al-Qurʾān.txt', 'a') as f:
+                            f.write("بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ" +
+                                    "\n")
+                    sūrah += 1
+                else:
+                    ʾāyah_split = ʾāyah_list[i - 1].split('|')
+                    ʾāyah_number = ʾāyah_split[1]
+                    ʾāyah = ʾāyah_split[-1]
+                    with open('Resources/al-Qurʾān.txt', 'a') as f:
+                        f.write(ʾāyah_number + ' ' + ʾāyah + '\n')
+            else:
+                break
+'''
 
 bot.add_cog(Cocánb(bot))
 bot.add_cog(Unicode(bot))
