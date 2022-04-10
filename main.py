@@ -839,12 +839,20 @@ Contents:
 
 @bot.command(
     name='quran',
-    help="Sends a verse from al-Qurʾān given the sūrah and ʾāyah numbers")
+    help="Sends a ʾāyah from al-Qurʾān given the sūrah and ʾāyah numbers (Type 'c.quran 0 0' for a random ʾāyah)")
 async def quran(ctx, sūrah: int, ʾāyah: int):
+      
     my_file = open("Resources/quran_arabic.txt", "r")
     content = my_file.read()
     sūrah_list = content.split("\n\n")
+    if sūrah == 0 and ʾāyah == 0:
+      sūrah = random.randint(1, 114)
+      ʾāyah_list = sūrah_list[sūrah-1].split("\n")
+      ʾāyah = random.randint (1, len(ʾāyah_list))
+      print (sūrah)
+      print (ʾāyah)
     my_file.close()
+      
     try:
         sūrah_0 = sūrah_list[sūrah - 1]
         ʾāyah_list = sūrah_0.split("\n")
