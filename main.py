@@ -839,14 +839,19 @@ Contents:
 
 @bot.command(
     name='quran',
-    help="Sends a ʾāyah from al-Qurʾān given the sūrah and ʾāyah numbers (Type 'c.quran 0 0' for a random ʾāyah)")
+    help="Sends a ʾāyah from al-Qurʾān given the sūrah and ʾāyah numbers (Type 'c.quran 0 0' for a random ʾāyah in the whole Qurʾān or 'c.quran <sūrah> 0' for a random ʾāyah in a specific sūrah)")
 async def quran(ctx, sūrah: int, ʾāyah: int):
       
     my_file = open("Resources/quran_arabic.txt", "r")
     content = my_file.read()
     sūrah_list = content.split("\n\n")
-    if sūrah == 0 and ʾāyah == 0:
+    if sūrah == 0 or sūrah is None:
       sūrah = random.randint(1, 114)
+      ʾāyah_list = sūrah_list[sūrah-1].split("\n")
+      ʾāyah = random.randint (1, len(ʾāyah_list))
+      print (sūrah)
+      print (ʾāyah)
+    elif sūrah != 0 and ʾāyah == 0:
       ʾāyah_list = sūrah_list[sūrah-1].split("\n")
       ʾāyah = random.randint (1, len(ʾāyah_list))
       print (sūrah)
