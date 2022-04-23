@@ -8,6 +8,8 @@ import unicodedata
 
 import clipboard
 
+import docx2txt
+
 import textwrap
 
 bot = commands.Bot(command_prefix='c.', description='A bot for members of the Cocánb')
@@ -23,14 +25,23 @@ class Unicode(commands.Cog):
     codepoints = codepoint.split(' ')
     responses = list()
     for i in range(len(codepoints)):
-      response = chr(int(codepoints[i],16))
+      i_dec = int(codepoints[i],16)
+      response = chr(i_dec)
+      ''' for surrogate chars (failed)
+      else:
+        my_text = docx2txt.process("Resources/surrogate chars.docx")
+        surrogate_char_list = my_text.split("\n")
+        response = surrogate_char_list[i_dec-55296]
+      '''
       responses.append(response)
     responses = ''.join(responses)
     await ctx.send('`' + responses + '`')
+
+    embed=discord.Embed(title="Hold to copy then delete the final ←",description=responses+'←')
+    
+    await ctx.send(embed=embed)
     '''
-    embed=discord.Embed(title="Click to copy",description=responses)
-    await ctx.send(embed=embed,
-                   components = [Button(label="Copy (WIP)", custom_id="button1")])
+    components = [Button(label="Copy (WIP)", custom_id="button1")])
     while True:
       interaction = await self.bot.wait_for("button_click")
       await interaction.send(content = "Copied to clipboard (WIP)", ephemeral = True)
