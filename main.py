@@ -2,6 +2,8 @@ import discord
 from discord.ext import commands
 from discord.utils import get
 
+from discord_components import DiscordComponents, ComponentsBot, Button, SelectOption, Select
+
 import json
 
 import os
@@ -32,6 +34,8 @@ from moderation import Moderation
 
 import asyncio
 
+import clipboard
+
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
@@ -41,6 +45,7 @@ intents.members = True
 bot = commands.Bot(command_prefix="c.", intents=intents)
 guild = bot.get_guild(731109675327553567)
 
+DiscordComponents(bot)
 
 @bot.event
 async def on_ready():

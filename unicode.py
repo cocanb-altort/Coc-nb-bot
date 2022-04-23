@@ -1,12 +1,18 @@
 import discord
 from discord.ext import commands
 
+from discord_components import DiscordComponents, ComponentsBot, Button, SelectOption, Select
+
 from unicodedata import *
 import unicodedata
+
+import clipboard
 
 import textwrap
 
 bot = commands.Bot(command_prefix='c.', description='A bot for members of the Cocánb')
+
+DiscordComponents(bot)
 
 class Unicode(commands.Cog):
   def __init__(self, bot):
@@ -20,8 +26,17 @@ class Unicode(commands.Cog):
       response = chr(int(codepoints[i],16))
       responses.append(response)
     responses = ''.join(responses)
-    await ctx.send('```\n' + responses + '\n```')
+    await ctx.send('`' + responses + '`')
+    '''
+    embed=discord.Embed(title="Click to copy",description=responses)
+    await ctx.send(embed=embed,
+                   components = [Button(label="Copy (WIP)", custom_id="button1")])
+    while True:
+      interaction = await self.bot.wait_for("button_click")
+      await interaction.send(content = "Copied to clipboard (WIP)", ephemeral = True)
+    '''
 
+  
   @bot.command(name='tocode', help='Converts character to unicode codepoint')
   async def tocode (self, ctx, *, character):
     characters = list(character)
