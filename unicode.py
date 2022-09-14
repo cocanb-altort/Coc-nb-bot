@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands
 
-from discord_components import DiscordComponents, ComponentsBot, Button, SelectOption, Select
 
 from unicodedata import *
 import unicodedata
@@ -13,8 +12,6 @@ import docx2txt
 import textwrap
 
 bot = commands.Bot(command_prefix='c.', description='A bot for members of the Cocánb')
-
-DiscordComponents(bot)
 
 class Unicode(commands.Cog):
   def __init__(self, bot):
@@ -104,3 +101,24 @@ class Unicode(commands.Cog):
         await ctx.send("Full Unicode Chart.jar", file=discord.File(file, "Full Unicode Chart.jar"))
     else:
       await ctx.send("Invalid format")
+
+  @bot.command(name='ucsur', help='Converts toki pona words into UCSUR codepoints.\n\nWords supported: all nimi ku suli + pake, apeja, majuna, powe\n\nTo use this command, separate everything with spaces, including punctuation and control characters\n\nTo use a cartouche, put "[" and "]" before and after the whole name, and "=" after every word, for example:\n  [ nimi = nimi = nimi = ]\n\nTo use long pi, replace the "pi" with "|", then put _ after every word, for example:\n  nimi | nimi _ nimi _\n\nPunctuation supported: "." and ":"\n\nControl characters supported (for usage refer to UCSUR standard):\n  "stack": stacking joiner\n  "scale": scaling joiner\n  "slg"/"elg": start/end of long glyph\n  "lge": combining long glyph extension\n  "srlg"/"erlg": start/end of reverse long glyph')
+  async def ucsur(self, ctx, *, tokipona):
+    allkuwords = "a akesi ala alasa ale anpa ante anu awen e en esun ijo ike ilo insa jaki jan jelo jo kala kalama kama kasi ken kepeken kili kiwen ko kon kule kulupu kute la lape laso lawa len lete li lili linja lipu loje lon luka lukin lupa ma mama mani meli mi mije moku moli monsi mu mun musi mute nanpa nasa nasin nena ni nimi noka o olin ona open pakala pali palisa pan pana pi pilin pimeja pini pipi poka poki pona pu sama seli selo seme sewi sijelo sike sin sina sinpin sitelen sona soweli suli suno supa suwi tan taso tawa telo tenpo toki tomo tu unpa uta utala walo wan waso wawa weka wile namako kin oko kipisi leko monsuta tonsi jasima kijetesantakalu soko meso epiku kokosila lanpan n misikeke ku"
+    kulist = allkuwords.split(" ")
+
+    kudict = {}
+    for i in range(len(kulist)):
+        kudict[kulist[i]] = chr(int("F1900",16)+i)
+    kudict.update({'ali':'\U000f1904', '[': '\U000f1990', ']':'\U000f1991', '=':'\U000f1992', '|':'\U000f1993', '_':'\U000f1994', 'stack':'\U000f1995', 'scale':'\U000f1996', 'slg':'\U000f1997','elg':'\U000f1998', 'lge':'\U000f1999', 'srlg':'\U000f199a', 'erlg':'\U000f199b','.':'\U000f199c',':':'\U000f199d','pake':'\U000f19a0','apeja':'\U000f19a1','majuna':'\U000f19a2','powe':'\U000f19a3'})
+
+    tokiponawords = tokipona.split(' ')
+    ucsur = ''
+    for i in range(len(tokiponawords)):
+      if tokiponawords[i] in kudict:
+        ucsur += kudict[tokiponawords[i]]
+      else:
+        ucsur += '*'
+    await ctx.send (ucsur)
+        
+    

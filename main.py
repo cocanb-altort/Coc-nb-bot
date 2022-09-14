@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 from discord.utils import get
 
-from discord_components import DiscordComponents, ComponentsBot, Button, SelectOption, Select
 
 import json
 
@@ -27,7 +26,8 @@ import cocanb
 import docx2txt
 
 from replit import db
-from keep_alive import keep_alive
+import neverSleep
+neverSleep.awake("https://Cocanb-bot.andersyu31415.repl.co", False)
 
 from cocanb import Cocánb
 from unicode import Unicode
@@ -47,7 +47,6 @@ intents.members = True
 bot = commands.Bot(command_prefix="c.", intents=intents)
 guild = bot.get_guild(731109675327553567)
 
-DiscordComponents(bot)
 
 @bot.event
 async def on_ready():
@@ -146,7 +145,7 @@ async def on_message(message):
 
     if (
             message.channel.id == 932896343901478963
-            or message.channel.id == 942683791753887804
+            or message.channel.id == 942683791753887804 or message.channel.id == 819110803612368896
     ) and message.author.id != 801983327023398912 and "c.kaczynski" not in message.content:
         #open quote file
         my_file = open("Resources/kaczynski_quotes.txt", "r")
@@ -948,7 +947,7 @@ quranfulldmstop = False
     "Sends al-Qurʾān in full as messages in someone's dms (Warning: Takes more than 1 hour and 54 minutes to complete)"
 )
 async def quranfulldm(ctx, user: discord.User):
-    if ctx.message.author.id == 607583934527569920 or ctx.message.author.id == 509239077212782592:
+    if ctx.message.author.id == 607583934527569920 or ctx.message.author.id == 509239077212782592 or ctx.message.author.id == 702746453927264276:
         await ctx.send(f"Messaged <@{user.id}> al-Qurʾān.")
 
         my_file = open("Resources/quran_arabic.txt", "r")
@@ -1112,5 +1111,4 @@ bot.add_cog(Unicode(bot))
 bot.add_cog(Acknowledgements(bot))
 bot.add_cog(Moderation(bot))
 
-keep_alive()
 bot.run(TOKEN)
