@@ -27,7 +27,8 @@ import docx2txt
 
 from replit import db
 import neverSleep
-neverSleep.awake("https://Cocanb-bot.andersyu31415.repl.co", False)
+
+neverSleep.awake('https://'+str(os.environ['REPL_SLUG']).lower()+'.'+str(os.environ['REPL_OWNER']).lower()+'.repl.co', True)
 
 from cocanb import Cocánb
 from unicode import Unicode
@@ -347,7 +348,7 @@ async def msgreturn(ctx, *, msg):
              help="Sends information for Minecraft server")
 async def minecraftinfo(ctx):
     await ctx.send(
-        'SERVER INFO:\nHostname: cocanb.aternos.me:36520\nIP: 185.116.157.37\nPort: 36520\n\nVersion: PaperMC 1.17.1\nPlugins: DiscordSRV, WorldEdit\nGamemode: Creative\nDifficulty: Normal'
+        'SERVER INFO:\nHostname: cocanb.aternos.me:36520\nIP: 185.116.157.37\nPort: 36520\n\nVersion: PaperMC 1.19.2 (194)\nPlugins: DiscordSRV, WorldEdit\nGamemode: Creative\nDifficulty: Normal'
     )
 
 
@@ -1111,4 +1112,9 @@ bot.add_cog(Unicode(bot))
 bot.add_cog(Acknowledgements(bot))
 bot.add_cog(Moderation(bot))
 
-bot.run(TOKEN)
+
+try:
+    bot.run(TOKEN)
+except:
+    os.system("kill 1")
+
