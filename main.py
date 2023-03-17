@@ -48,6 +48,7 @@ intents.members = True
 bot = commands.Bot(command_prefix="c.", intents=intents)
 guild = bot.get_guild(731109675327553567)
 
+bot.launch_time = datetime.utcnow()
 
 @bot.event
 async def on_ready():
@@ -180,6 +181,14 @@ async def on_message(message):
              help="Checks whether bot is online and return latency time.")
 async def ping(ctx: commands.Context):
     await ctx.send(f"Bot is online.\nPing: {bot.latency * 1000}ms")
+
+@bot.command()
+async def uptime(ctx):
+    delta_uptime = datetime.utcnow() - bot.launch_time
+    hours, remainder = divmod(int(delta_uptime.total_seconds()), 3600)
+    minutes, seconds = divmod(remainder, 60)
+    days, hours = divmod(hours, 24)
+    await ctx.reply(f"Online Time: {days}d, {hours}h, {minutes}m, {seconds}s")
 
 
 @bot.command(pass_context=True)
@@ -348,7 +357,7 @@ async def msgreturn(ctx, *, msg):
              help="Sends information for Minecraft server")
 async def minecraftinfo(ctx):
     await ctx.send(
-        'SERVER INFO:\nHostname: cocanb.aternos.me:36520\nIP: 185.116.157.37\nPort: 36520\n\nVersion: PaperMC 1.19.3\nPlugins: DiscordSRV, WorldEdit\nGamemode: Creative\nDifficulty: Normal\n\n*Whitelist required.'
+        'SERVER INFO:\nHostname: cocanb.aternos.me:36520\nPort: 36520\n\nVersion: PaperMC 1.19.4\nPlugins: DiscordSRV, WorldEdit\nGamemode: Creative\nDifficulty: Normal\n\n*Whitelist required.'
     )
 
 
